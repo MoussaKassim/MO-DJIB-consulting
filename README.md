@@ -1,4 +1,4 @@
-<MO-DJIB CONSULTING>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -9,31 +9,34 @@
     <style>
         /* Styles pour la navbar */
         .navbar {
-            background-color: #000;
+            background-color: transparent;
+            padding: 20px 0;
         }
 
         .navbar-brand {
-            color: #fff;
+            color: #007bff;
             font-weight: bold;
-            font-size: 24px;
+            font-size: 32px;
         }
 
         .navbar-nav .nav-item .nav-link {
-            color: #fff;
+            color: #343a40;
             font-weight: bold;
             font-size: 18px;
-            padding: 20px;
+            padding: 10px 20px;
             transition: all 0.3s ease;
         }
 
         .navbar-nav .nav-item .nav-link:hover {
             background-color: #007bff;
             color: #fff;
+            border-radius: 10px;
         }
 
         /* Styles pour les sections */
         .section {
             padding: 50px 0;
+            background-color: #f8f9fa;
         }
 
         .section-title {
@@ -44,9 +47,6 @@
         }
 
         .rectangle {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 20px;
             padding: 30px;
             margin-bottom: 30px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -61,10 +61,13 @@
         .rectangle h2 {
             color: #007bff;
             font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 15px;
         }
 
         .rectangle p {
             color: #6c757d;
+            font-size: 18px;
         }
 
         .icon {
@@ -91,7 +94,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Mo-Djib Consulting</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
