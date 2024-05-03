@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<MO-DJIB CONSULTING>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
