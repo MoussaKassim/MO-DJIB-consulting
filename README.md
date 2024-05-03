@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<MO-DJIB CONSULTING>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -77,7 +77,7 @@
 
 <!-- Grande image -->
 <section class="big-image">
-    <img src="Users/T0087231/Desktop/1620768752769.jpg" class="section-image" alt="Image">
+    <img src="1620768752769.jpg" class="section-image" alt="Image">
 </section>
 
 <!-- Titre Bienvenue -->
