@@ -1,4 +1,4 @@
-<MO-DJIB CONSULTING>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Ajoutez vos styles CSS personnalisés ici */
+
+        /* Styles pour le menu */
+        .navbar {
+            background-color: #343a40;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: gold;
+        }
+
+        .nav-item {
+            margin-right: 20px;
+        }
+
+        .nav-link {
+            font-size: 18px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: lightgray;
+        }
 
         /* Styles pour la grande image */
         .big-image {
@@ -39,7 +66,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="#">Mo-Djib Consulting</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
