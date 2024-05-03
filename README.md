@@ -19,7 +19,7 @@
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
         .navbar-brand {
-            color: #FFA500; /* Orange */
+            color: #FFD700; /* Gold */
             font-size: 24px;
             font-weight: bold;
         }
@@ -31,14 +31,14 @@
             margin-right: 20px;
         }
         .navbar-nav .nav-link:hover {
-            color: #FFA500;
+            color: #008000; /* Green */
         }
         /* Body padding to compensate for fixed navbar */
         body {
             padding-top: 70px;
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #F0F0F0; /* Light Gray */
+            background-color: #F8F9FA;
             color: #333; /* Dark Gray */
         }
         /* Banner */
@@ -73,6 +73,7 @@
         .service-item h3 {
             font-size: 24px;
             margin-bottom: 20px;
+            color: #333; /* Dark Gray */
         }
         .service-item p {
             font-size: 16px;
@@ -94,15 +95,15 @@
         }
         /* Footer */
         footer {
-            background-color: #FFA500; /* Orange */
-            color: #fff;
+            background-color: #FFD700; /* Gold */
+            color: #333; /* Dark Gray */
             padding: 20px 0;
             text-align: center;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            border-top: 2px solid #000; /* Black */
+            position: relative;
+            margin-top: 50px;
+        }
+        footer p {
+            color: #000; /* Black */
         }
     </style>
 </head>
@@ -164,6 +165,29 @@
                     <img src="https://via.placeholder.com/150" alt="Accompagnement">
                     <h3>Accompagnement</h3>
                     <p>Nous vous accompagnons dans la mise en place de plans d'action.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="Pack Hygiène">
+                    <h3>Pack Hygiène</h3>
+                    <p>Optez pour notre pack hygiène complet pour l'excellence.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="Actualités">
+                    <h3>Actualités</h3>
+                    <p>Tenez-vous informé des dernières actualités dans notre domaine.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="Contactez-nous">
+                    <h3>Contactez-nous</h3>
+                    <p>Nous sommes là pour répondre à toutes vos questions.</p>
                 </div>
             </div>
         </div>
