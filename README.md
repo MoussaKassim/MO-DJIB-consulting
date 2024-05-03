@@ -7,23 +7,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Styles pour les titres */
-        .gold-text {
-            color: gold;
+        /* Styles pour la navbar */
+        .navbar {
+            background-color: #000;
         }
 
-        /* Styles pour les rectangles du menu */
-        .nav-item {
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #343a40;
-            border-radius: 20px;
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 20px;
             transition: all 0.3s ease;
         }
 
-        .nav-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: #007bff;
+            color: #fff;
         }
 
         /* Styles pour les sections */
@@ -41,9 +46,9 @@
         .rectangle {
             background-color: #f8f9fa;
             border: 1px solid #dee2e6;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
@@ -72,7 +77,7 @@
         .section-image {
             width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
@@ -86,8 +91,8 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">Mo-Djib Consulting</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
