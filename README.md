@@ -12,7 +12,32 @@
             color: gold;
         }
 
-        /* Styles pour les rectangles */
+        /* Styles pour les rectangles du menu */
+        .nav-item {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #343a40;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styles pour les sections */
+        .section {
+            padding: 50px 0;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 24px;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
         .rectangle {
             background-color: #f8f9fa;
             border: 1px solid #dee2e6;
@@ -22,10 +47,19 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Styles pour les icônes */
+        .rectangle h2 {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .rectangle p {
+            color: #6c757d;
+        }
+
         .icon {
-            font-size: 24px;
+            font-size: 36px;
             margin-right: 10px;
+            color: #007bff;
         }
 
         /* Styles pour les images */
@@ -87,7 +121,7 @@
 </section>
 
 <!-- Titre Bienvenue -->
-<section class="welcome-message">
+<section class="welcome-message section">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
@@ -99,7 +133,7 @@
 </section>
 
 <!-- Section avec texte et image -->
-<section class="about-section">
+<section class="about-section section">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -117,7 +151,7 @@
 </section>
 
 <!-- Section Nos Services -->
-<section class="our-services">
+<section class="our-services section">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -131,19 +165,19 @@
                     <div class="col-md-4">
                         <div class="rectangle">
                             <i class="icon fas fa-chalkboard-teacher"></i>
-                            <p>Former</p>
+                            <h3>Former</h3>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="rectangle">
                             <i class="icon fas fa-clipboard-check"></i>
-                            <p>Auditer</p>
+                            <h3>Auditer</h3>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="rectangle">
                             <i class="icon fas fa-handshake"></i>
-                            <p>Accompagner</p>
+                            <h3>Accompagner</h3>
                         </div>
                     </div>
                 </div>
@@ -153,7 +187,7 @@
 </section>
 
 <!-- Section Qui sommes-nous -->
-<section class="who-we-are">
+<section class="who-we-are section">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -176,7 +210,7 @@
 </section>
 
 <!-- Section Notre Pack Hygiène -->
-<section class="pack-hygiene">
+<section class="pack-hygiene section">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -190,7 +224,7 @@
 </section>
 
 <!-- Section Nos Services -->
-<section class="our-services">
+<section class="our-services section">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -216,7 +250,7 @@
 </section>
 
 <!-- Section Contactez-nous -->
-<section class="contact-us">
+<section class="contact-us section">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
