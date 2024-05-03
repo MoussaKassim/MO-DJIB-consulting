@@ -77,7 +77,7 @@
 
 <!-- Grande image -->
 <section class="big-image">
-    <img src="[1620768752769.jpg](https://github.com/MoussaKassim/MO-DJIB-consulting/blob/main/1620768752769.jpg)" class="section-image" alt="Image">
+    <img src="1620768752769.jpg" class="section-image" alt="Image">
 </section>
 
 <!-- Titre Bienvenue -->
@@ -163,7 +163,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <img src="chemin/vers/votre/image2.jpg" class="section-image" alt="Image">
+                <img src="1710097249066.jpg" class="section-image" alt="Image">
             </div>
         </div>
     </div>
