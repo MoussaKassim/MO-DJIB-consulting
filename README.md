@@ -9,41 +9,6 @@
     <style>
         /* Ajoutez vos styles CSS personnalisés ici */
 
-        /* Styles pour le menu */
-        .navbar {
-            background-color: #343a40;
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-
-        .navbar-brand {
-            font-size: 28px;
-            font-weight: bold;
-            color: gold;
-        }
-
-        .nav-item {
-            margin-right: 20px;
-        }
-
-        .nav-link {
-            font-size: 18px;
-            color: #fff;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: lightgray;
-        }
-
-        /* Styles pour la grande image */
-        .big-image {
-            background-image: url('chemin/vers/votre/image.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 500px;
-        }
-
         /* Styles pour les titres */
         .gold-text {
             color: gold;
@@ -62,60 +27,26 @@
             margin-right: 10px;
         }
 
-        /* Styles pour la section de mise en avant */
-        .highlight-section {
-            background-color: #f8f9fa;
-            padding: 50px 0;
+        /* Styles pour les vidéos */
+        .video-box {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
         }
-
-        .highlight-text {
-            font-size: 36px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .highlight-description {
-            font-size: 18px;
-            color: #666;
-        }
-
-        /* Styles pour les éléments de mise en avant */
-        .feature-box {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .feature-box:hover {
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: gold;
-        }
-
-        .feature-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .feature-description {
-            font-size: 18px;
-            color: #666;
+        
+        .video-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="#">Mo-Djib Consulting</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,7 +82,9 @@
 </nav>
 
 <!-- Grande image -->
-<section class="big-image"></section>
+<section class="big-image">
+    <img src="chemin/vers/votre/image.jpg" alt="Image">
+</section>
 
 <!-- Titre Bienvenue -->
 <section class="welcome-message">
@@ -165,133 +98,47 @@
     </div>
 </section>
 
-<!-- Section avec texte et image -->
-<section class="about-section">
+<!-- Section des vidéos -->
+<section class="video-section">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div class="rectangle">
-                    <h2>Plus de 10 ans d’expériences</h2>
-                    <p>Votre expert en qualité, hygiène et sécurité des aliments</p>
-                    <p>MO-DJIB CONSULTING est un cabinet de conseil, d’audit et de formation dans le domaine de la qualité, l’hygiène et la sécurité des denrées alimentaires. Notre équipe vous accompagne : porteurs de projets et chefs d’entreprise quelque soit votre type d’activité : du snack à l’industrie agro-alimentaire, en passant par la restauration commerciale, collective, la distribution et les métiers de bouche (boulangerie, patisserie, boucherie, charcuterie,..)</p>
+                <div class="video-box">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="rectangle">
-                    <!-- Insérez ici votre image -->
+                <div class="video-box">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Section de mise en avant -->
-<section class="highlight-section">
+<!-- Liens vers les images -->
+<section class="image-links">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center mb-4">
-                <h2 class="highlight-text">Pourquoi choisir Mo-Djib Consulting ?</h2>
-                <p class="highlight-description">Nous sommes dédiés à votre succès et à votre sécurité alimentaire</p>
+            <div class="col-md-4">
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fdj.linkedin.com%2Fin%2Fmoussa-kassim-55a362201&psig=AOvVaw2eLrPFCJC_BsQYHuBAJqko&ust=1714829679911000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCMjai8XM8YUDFQAAAAAdAAAAABAJ" alt="Image 1">
             </div>
             <div class="col-md-4">
-                <div class="feature-box">
-                    <i class="feature-icon fas fa-medal"></i>
-                    <h3 class="feature-title">Excellence</h3>
-                    <p class="feature-description">Nous visons l'excellence dans tous nos services pour vous offrir les meilleurs résultats.</p>
-                </div>
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2Fconsulting_Mo&psig=AOvVaw2eLrPFCJC_BsQYHuBAJqko&ust=1714829679911000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCMjai8XM8YUDFQAAAAAdAAAAABAE" alt="Image 2">
             </div>
             <div class="col-md-4">
-                <div class="feature-box">
-                    <i class="feature-icon fas fa-handshake"></i>
-                    <h3 class="feature-title">Partenariat</h3>
-                    <p class="feature-description">Nous considérons nos clients comme des partenaires et nous nous engageons à les accompagner à chaque étape.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="feature-box">
-                    <i class="feature-icon fas fa-users"></i>
-                    <h3 class="feature-title">Expertise</h3>
-                    <p class="feature-description">Notre équipe est composée d'experts chevronnés dans le domaine de la sécurité alimentaire.</p>
-                </div>
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2FMOUSSA_KASSIM_&psig=AOvVaw1flIAOtbXvKLDx4ktVjSJg&ust=1714829809059000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCICosYbN8YUDFQAAAAAdAAAAABAE" alt="Image 3">
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Section Qui sommes-nous -->
-<section class="who-we-are">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="rectangle">
-                    <h2>Qui sommes-nous ?</h2>
-                    <p>MO-DJIB CONSULTING, les experts dont vous avez besoin</p>
-                    <p>Notre expérience professionnelle nous permet de vous apporter les meilleurs conseils et expertises en sécurité alimentaire quelque soit votre projet ou votre activité.</p>
-                    <ul>
-                        <li>Maîtrise de la réglementation en vigueur</li>
-                        <li>Mise en place des process</li>
-                        <li>Accompagnement des équipes</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <!-- Insérez ici votre image -->
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Notre Pack Hygiène -->
-<section class="pack-hygiene">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="rectangle">
-                    <h2>Notre Pack Hygiène</h2>
-                    <p>Inspection d'hygiène, formation HACCP, audit et accompagnement</p>
-                    <p><a href="#">Découvrir la solution</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Nos Services 2 -->
-<section class="our-services-2">
-    <div class="container">
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-md-4">
-                <div class="rectangle">
-                    <h3>Formations</h3>
-                    <p>MO-DJIB CONSULTING vous propose des formations en hygiène alimentaire spécifiques selon le type d’activité; restauration commerciale, collective, petite enfance, …une formation bonnes pratiques d’hygiène, et des formations HACCP et ISO22000 destinées aux industries agro-alimentaires.</p>
-                </div>
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.linkedin.com%2Fposts%2Fmoussa-kassim-55a362201_foiredjibouti-mo-expertisequalit%25C3%25A9alimentaire-activity-7137106965821857792-J0HZ&psig=AOvVaw1flIAOtbXvKLDx4ktVjSJg&ust=1714829809059000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCICosYbN8YUDFQAAAAAdAAAAABAJ" alt="Image 4">
             </div>
             <div class="col-md-4">
-                <div class="rectangle">
-                    <h3>Audits</h3>
-                    <p>Dans le cadre du système de vérification du plan HACCP, le Cabinet MO-DJIB CONSULTING peut vous accompagner sur l’année grâce à des audits réguliers ou de façon ponctuelle avec suivi des actions correctives incluant le suivi des analyses bactériologiques. Faites nous confiance afin d’être prêt en cas de visite par les services officiels de l’état. En fonction de vos objectifs, notre équipe d’experts vous accompagne. Contactez-nous !</p>
-                </div>
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.linkedin.com%2Fposts%2Fmoussa-kassim-55a362201_modjibconsulting-hygi%25C3%25A8nealimentaire-qualit%25C3%25A9-activity-7138115438114246657-HWLD&psig=AOvVaw1flIAOtbXvKLDx4ktVjSJg&ust=1714829809059000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCICosYbN8YUDFQAAAAAdAAAAABAO" alt="Image 5">
             </div>
             <div class="col-md-4">
-                <div class="rectangle">
-                    <h3>Accompagnement</h3>
-                    <p>Bonnes Pratiques d’Hygiène, Plan HACCP, traçabilité et Gestion des produits non conformes… Comptez sur nous pour vous accompagner pour votre dossier plan de maîtrise sanitaire, ou dossier d’agrément sanitaire, votre SMSDA ou votre DUERP. Nous pouvons également vous proposer une solution numérique pour la digitalisation de vos auto-contrôles réglementaires avec sondes connectées.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Contactez-nous -->
-<section class="contact-us">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="rectangle">
-                    <h2>Contactez-nous</h2>
-                    <p>Vous souhaitez en savoir plus sur nos services ou discuter de vos besoins spécifiques en matière de qualité, d'hygiène et de sécurité alimentaire ? N'hésitez pas à nous contacter dès aujourd'hui. Notre équipe est là pour répondre à toutes vos questions et vous aider à atteindre vos objectifs. Chez Mo-Djib Consulting, votre succès est notre priorité.</p>
-                    <p>© 2024 Mo-Djib Consulting. Tous droits réservés.</p>
-                </div>
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.linkedin.com%2Fposts%2Fmoussa-kassim-55a362201_modjibatfid-visionmondiale-foiredjibouti2023-activity-7139438987236085760-0oo6%3Ftrk%3Dpublic_profile_like_view&psig=AOvVaw1flIAOtbXvKLDx4ktVjSJg&ust=1714829809059000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCICosYbN8YUDFQAAAAAdAAAAABAS" alt="Image 6">
             </div>
         </div>
     </div>
