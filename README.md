@@ -1,4 +1,4 @@
-<MO-DJIB CONSULTING>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -34,6 +34,12 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        /* Animation d'agrandissement des images au survol */
+        .section-image:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
