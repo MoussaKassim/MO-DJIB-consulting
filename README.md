@@ -1,4 +1,4 @@
-<MO-DJIB CONSULTING>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -9,18 +9,18 @@
     <style>
         /* Styles pour la navbar */
         .navbar {
-            background-color: transparent;
+            background-color: #007bff;
             padding: 20px 0;
         }
 
         .navbar-brand {
-            color: #007bff;
+            color: #fff;
             font-weight: bold;
             font-size: 32px;
         }
 
         .navbar-nav .nav-item .nav-link {
-            color: #343a40;
+            color: #fff;
             font-weight: bold;
             font-size: 18px;
             padding: 10px 20px;
@@ -28,8 +28,7 @@
         }
 
         .navbar-nav .nav-item .nav-link:hover {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #0056b3;
             border-radius: 10px;
         }
 
@@ -94,7 +93,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Mo-Djib Consulting</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
