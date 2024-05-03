@@ -89,7 +89,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="rectangle">
-                    <h2>Plus de 1 ans d’expériences</h2>
+                    <h2>Plus de 10 ans d’expériences</h2>
                     <p>Votre expert en qualité, hygiène et sécurité des aliments</p>
                     <p>MO-DJIB CONSULTING est un cabinet de conseil, d’audit et de formation dans le domaine de la qualité, l’hygiène et la sécurité des denrées alimentaires. Notre équipe vous accompagne : porteurs de projets et chefs d’entreprise quelque soit votre type d’activité : du snack à l’industrie agro-alimentaire, en passant par la restauration commerciale, collective, la distribution et les métiers de bouche (boulangerie, patisserie, boucherie, charcuterie,..)</p>
                 </div>
@@ -170,14 +170,15 @@
                 <div class="rectangle">
                     <h2>Notre Pack Hygiène</h2>
                     <p>Inspection d'hygiène, formation HACCP, audit et accompagnement</p>
+                    <p><a href="#">Découvrir la solution</a></p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Section Nos Services -->
-<section class="our-services">
+<!-- Section Nos Services 2 -->
+<section class="our-services-2">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
