@@ -77,7 +77,7 @@
 
 <!-- Grande image -->
 <section class="big-image">
-    <img src="chemin/vers/votre/image.jpg" class="section-image" alt="Image">
+    <img src="Users/T0087231/Desktop/1620768752769.jpg" class="section-image" alt="Image">
 </section>
 
 <!-- Titre Bienvenue -->
