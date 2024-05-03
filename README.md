@@ -61,6 +61,55 @@
             font-size: 24px;
             margin-right: 10px;
         }
+
+        /* Styles pour la section de mise en avant */
+        .highlight-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+
+        .highlight-text {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .highlight-description {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Styles pour les éléments de mise en avant */
+        .feature-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-box:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: gold;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            font-size: 18px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -136,36 +185,33 @@
     </div>
 </section>
 
-<!-- Section Nos Services -->
-<section class="our-services">
+<!-- Section de mise en avant -->
+<section class="highlight-section">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <div class="rectangle">
-                    <h2>Nos Services</h2>
-                    <p>Nous sommes à votre écoute</p>
+            <div class="col-md-12 text-center mb-4">
+                <h2 class="highlight-text">Pourquoi choisir Mo-Djib Consulting ?</h2>
+                <p class="highlight-description">Nous sommes dédiés à votre succès et à votre sécurité alimentaire</p>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <i class="feature-icon fas fa-medal"></i>
+                    <h3 class="feature-title">Excellence</h3>
+                    <p class="feature-description">Nous visons l'excellence dans tous nos services pour vous offrir les meilleurs résultats.</p>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="rectangle">
-                            <i class="icon fas fa-chalkboard-teacher"></i>
-                            <p>Former</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="rectangle">
-                            <i class="icon fas fa-clipboard-check"></i>
-                            <p>Auditer</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="rectangle">
-                            <i class="icon fas fa-handshake"></i>
-                            <p>Accompagner</p>
-                        </div>
-                    </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <i class="feature-icon fas fa-handshake"></i>
+                    <h3 class="feature-title">Partenariat</h3>
+                    <p class="feature-description">Nous considérons nos clients comme des partenaires et nous nous engageons à les accompagner à chaque étape.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <i class="feature-icon fas fa-users"></i>
+                    <h3 class="feature-title">Expertise</h3>
+                    <p class="feature-description">Notre équipe est composée d'experts chevronnés dans le domaine de la sécurité alimentaire.</p>
                 </div>
             </div>
         </div>
