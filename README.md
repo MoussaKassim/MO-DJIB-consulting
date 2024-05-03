@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <img src="chemin/vers/votre/image1.jpg" class="section-image" alt="Image">
+                <img src="1697909151559 (1).jpg" class="section-image" alt="Image">
             </div>
         </div>
     </div>
