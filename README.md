@@ -83,7 +83,7 @@
 
 <!-- Grande image -->
 <section class="big-image">
-    <img src="chemin/vers/votre/image.jpg" alt="Image">
+    <img src="https://github.com/MoussaKassim/MO-DJIB-consulting/blob/main/1620768752769.jpg" alt="Image">
 </section>
 
 <!-- Titre Bienvenue -->
