@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<MO-DJIB CONSULTING>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -39,6 +39,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #F8F9FA;
+            color: #000000; /* Couleur noire par défaut */
         }
         /* Banner */
         .banner {
@@ -126,7 +127,7 @@
                     <a class="nav-link" href="#accompagnement">Accompagnement</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#e-pack-hygiene">E-Pack Hygiène</a>
+                    <a class="nav-link" href="#pack-hygiene">Pack Hygiène</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#actualites">Actualités</a>
@@ -180,8 +181,8 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="service-item">
-                    <img src="https://via.placeholder.com/150" alt="E-Pack Hygiène">
-                    <h3>E-Pack Hygiène</h3>
+                    <img src="https://via.placeholder.com/150" alt="Pack Hygiène">
+                    <h3>Pack Hygiène</h3>
                     <p>Optez pour notre pack hygiène complet pour l'excellence.</p>
                 </div>
             </div>
