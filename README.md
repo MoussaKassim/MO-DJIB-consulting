@@ -1,4 +1,4 @@
-<MO-DJIB CONSULTING>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -14,143 +14,100 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background-color: #333;
-            border-radius: 0; /* Rounded rectangle */
-        }
-        .navbar-nav .nav-link {
-            color: white;
-            transition: color 0.3s, background-color 0.3s; /* Transition for glowing effect */
-        }
-        .navbar-nav .nav-link:hover {
-            color: #FFA500; /* Modern orangish color */
-            background-color: rgba(255, 165, 0, 0.1); /* Orange background */
+            background-color: #1B1B1B;
+            border-radius: 0;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
         .navbar-brand {
-            color: white;
+            color: #fff;
             font-size: 24px;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            transition: color 0.3s;
+            font-size: 16px;
+            font-weight: 500;
+            margin-right: 20px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #FFA500;
         }
         /* Body padding to compensate for fixed navbar */
         body {
-            padding-top: 56px; /* Height of the navbar */
-            margin-left: 200px; /* Adjusted to accommodate the sidebar */
+            padding-top: 70px;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #F8F9FA;
         }
-        /* Sidebar Styles */
-        #sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            z-index: 1000;
-            background-color: #333;
-            width: 200px;
-            padding-top: 56px; /* Height of the navbar */
-            overflow-y: auto;
-            transition: all 0.3s;
+        /* Banner */
+        .banner {
+            background-image: url('https://images.unsplash.com/photo-1590252503894-e95a08e24736');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 50px;
         }
-        #sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        #sidebar ul li {
-            padding: 10px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        #sidebar ul li:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        #content {
-            margin-left: 200px; /* Adjusted to accommodate the sidebar */
-            padding: 20px;
-        }
-        /* Section Styles */
-        section {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-        }
-        section h1 {
-            color: #007bff;
+        .banner h1 {
+            font-size: 48px;
             margin-bottom: 20px;
         }
-        /* Card Styles */
-        .card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            cursor: pointer;
+        .banner p {
+            font-size: 20px;
         }
-        .card:hover {
-            transform: translateY(-5px);
+        /* Services Section */
+        .services {
+            padding: 50px 0;
+            background-color: #fff;
         }
-        .card-body {
+        .service-item {
+            margin-bottom: 40px;
             text-align: center;
         }
-        /* Code Styles */
-        pre {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            padding: 10px;
-            overflow-x: auto;
-            position: relative;
-            cursor: pointer;
+        .service-item h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
         }
-        pre:hover::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 255, 0.1); /* Blue color when hovered */
-            border-radius: 5px;
-            z-index: 1;
+        .service-item p {
+            font-size: 16px;
+            color: #6C757D;
         }
-        pre:hover::before {
-            content: "\f0ea"; /* FontAwesome copy icon */
-            font-family: "Font Awesome 5 Free";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            color: #007bff;
-            z-index: 2;
+        /* Contact Section */
+        .contact {
+            background-color: #1B1B1B;
+            color: #fff;
+            padding: 50px 0;
         }
-        .copy-box {
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            padding: 10px;
-            background-color: #f8f9fa;
-            margin-top: 20px;
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
         }
-        .copy-box:hover {
-            background-color: #e9ecef;
-        }
-        .copy-box::before {
-            content: "\f0c5"; /* FontAwesome copy icon */
-            font-family: "Font Awesome 5 Free";
-            position: absolute;
-            top: 50%;
-            left: 5px;
-            transform: translateY(-50%);
+        .contact p {
             font-size: 18px;
-            color: #007bff;
+            margin-bottom: 30px;
+        }
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
     </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="#">Mo-Djib Consulting</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,108 +115,121 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">À propos</a>
+                    <a class="nav-link" href="#formations">Formations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#services">Nos Services</a>
+                    <a class="nav-link" href="#audit">Audit</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#approach">Notre Approche</a>
+                    <a class="nav-link" href="#accompagnement">Accompagnement</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#team">Notre Équipe</a>
+                    <a class="nav-link" href="#e-pack-hygiene">E-Pack Hygiène</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contactez-nous</a>
+                    <a class="nav-link" href="#actualites">Actualités</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contactez-nous">Contactez-nous</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Sidebar -->
-<div id="sidebar">
-    <ul>
-        <li><a href="#about">À propos</a></li>
-        <li><a href="#services">Nos Services</a></li>
-        <li><a href="#approach">Notre Approche</a></li>
-        <li><a href="#team">Notre Équipe</a></li>
-        <li><a href="#contact">Contactez-nous</a></li>
-    </ul>
-</div>
-
-<!-- About Section -->
-<section id="about">
+<!-- Banner Section -->
+<section class="banner">
     <div class="container">
-        <h1>À propos de Mo-Djib Consulting</h1>
-        <p>Chez Mo-Djib Consulting, nous sommes bien plus qu'un simple cabinet de conseil, d’audit et de formation. Nous sommes une équipe passionnée et dévouée, prête à accompagner les porteurs de projets et les chefs d'entreprise, quel que soit leur domaine d'activité.</p>
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Bienvenue chez Mo-Djib Consulting</h1>
+                <p>Votre partenaire mondial pour la qualité, l'hygiène et la sécurité alimentaire</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- Services Section -->
-<section id="services">
+<section id="services" class="services">
     <div class="container">
-        <h1>Nos Services</h1>
-        <h2>Formations</h2>
-        <ul>
-            <li>Formations HACCP</li>
-            <li>Formation aux bonnes pratiques d'hygiène alimentaire en restauration collective</li>
-            <li>Formation aux bonnes pratiques d'hygiène alimentaire pour les boucheries-charcuteries</li>
-            <li>Hygiène alimentaire en restauration commerciale</li>
-        </ul>
-        <h2>Services Complémentaires</h2>
-        <ul>
-            <li>Audit</li>
-            <li>Accompagnement</li>
-            <li>Pack Hygiène</li>
-        </ul>
-    </div>
-</section>
-
-<!-- Approach Section -->
-<section id="approach">
-    <div class="container">
-        <h1>Notre Approche</h1>
-        <p>Chez Mo-Djib Consulting, nous croyons en une approche holistique de la qualité, de l'hygiène et de la sécurité alimentaire. Nous ne nous contentons pas de fournir des formations standard, mais nous nous engageons à comprendre les spécificités de votre entreprise et à concevoir des solutions sur mesure pour répondre à vos besoins uniques.</p>
-    </div>
-</section>
-
-<!-- Team Section -->
-<section id="team">
-    <div class="container">
-        <h1>Notre Équipe</h1>
-        <p>Notre équipe est composée d'experts chevronnés dans le domaine de la qualité, de l'hygiène et de la sécurité alimentaire. Leur expérience et leur expertise nous permettent d'offrir des services de haute qualité et des conseils avisés à nos clients.</p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="Formations">
+                    <h3>Formations</h3>
+                    <p>Des formations de haute qualité adaptées à vos besoins.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="Audit">
+                    <h3>Audit</h3>
+                    <p>Des services d'audit sur mesure pour garantir la qualité.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="Accompagnement">
+                    <h3>Accompagnement</h3>
+                    <p>Nous vous accompagnons dans la mise en place de plans d'action.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="E-Pack Hygiène">
+                    <h3>E-Pack Hygiène</h3>
+                    <p>Optez pour notre pack hygiène complet pour l'excellence.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="Actualités">
+                    <h3>Actualités</h3>
+                    <p>Tenez-vous informé des dernières actualités dans notre domaine.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-item">
+                    <img src="https://via.placeholder.com/150" alt="Contactez-nous">
+                    <h3>Contactez-nous</h3>
+                    <p>Nous sommes là pour répondre à toutes vos questions.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- Contact Section -->
-<section id="contact">
+<section id="contactez-nous" class="contact">
     <div class="container">
-        <h1>Contactez-nous</h1>
-        <p>Vous souhaitez en savoir plus sur nos services ou discuter de vos besoins spécifiques en matière de qualité, d'hygiène et de sécurité alimentaire ? N'hésitez pas à nous contacter dès aujourd'hui. Notre équipe est là pour répondre à toutes vos questions et vous aider à atteindre vos objectifs. Chez Mo-Djib Consulting, votre succès est notre priorité.</p>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Contactez-nous</h2>
+                <p>Vous souhaitez en savoir plus sur nos services ou discuter de vos besoins spécifiques en matière de qualité, d'hygiène et de sécurité alimentaire ? N'hésitez pas à nous contacter dès aujourd'hui. Notre équipe est là pour répondre à toutes vos questions et vous aider à atteindre vos objectifs. Chez Mo-Djib Consulting, votre succès est notre priorité.</p>
+            </div>
+        </div>
     </div>
 </section>
+
+<!-- Footer Section -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>&copy; 2024 Mo-Djib Consulting. Tous droits réservés.</p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <!-- Bootstrap Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<!-- JavaScript for Smooth Scrolling and Active Navigation -->
-<script>
-    // Smooth scrolling for sidebar links
-    document.querySelectorAll('#sidebar a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-</script>
 
 </body>
 </html>
