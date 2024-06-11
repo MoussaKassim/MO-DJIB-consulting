@@ -1,286 +1,238 @@
-<MO-DJIB CONSULTING>
+<!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mo-Djib Consulting</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Bienvenue chez Mo-Djib Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Styles pour la navbar */
-        .navbar {
-            background-color: #007bff;
-            padding: 20px 0;
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: url('https://gist.github.com/assets/168087487/d3dbfa90-80de-466a-8d53-eba7f79cf573') no-repeat center center fixed;
+            background-size: cover;
+            background-color: rgba(0, 0, 0, 0.5);
+            background-blend-mode: darken;
         }
 
-        .navbar-brand {
-            color: #fff;
-            font-weight: bold;
-            font-size: 32px;
+        header {
+            background: linear-gradient(to right, #3a6186, #89253e);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
-        .navbar-nav .nav-item .nav-link {
-            color: #fff;
-            font-weight: bold;
-            font-size: 18px;
-            padding: 10px 20px;
-            transition: all 0.3s ease;
+        header img.logo {
+            height: 80px;
+            margin-right: 20px;
         }
 
-        .navbar-nav .nav-item .nav-link:hover {
-            background-color: #0056b3;
-            border-radius: 10px;
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end;
         }
 
-        /* Styles pour les sections */
-        .section {
-            padding: 50px 0;
-            background-color: #f8f9fa;
+        nav ul li {
+            position: relative;
         }
 
-        .section-title {
-            font-weight: bold;
-            font-size: 24px;
-            color: #343a40;
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            padding: 0;
+        }
+
+        nav ul li:hover ul {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        nav ul li ul li {
+            width: 200px;
+        }
+
+        section {
+            padding: 120px 20px 20px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+        section h1 {
+            font-size: 3rem;
+            color: #333;
             margin-bottom: 20px;
         }
 
-        .rectangle {
-            padding: 30px;
+        section p {
+            font-size: 1.2rem;
+            color: #555;
             margin-bottom: 30px;
+        }
+
+        .transparent-rectangle {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
         }
 
-        .rectangle:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        .transparent-rectangle h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
         }
 
-        .rectangle h2 {
-            color: #007bff;
-            font-weight: bold;
-            font-size: 24px;
-            margin-bottom: 15px;
+        .transparent-rectangle p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
         }
 
-        .rectangle p {
-            color: #6c757d;
-            font-size: 18px;
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
         }
 
-        .icon {
-            font-size: 36px;
-            margin-right: 10px;
-            color: #007bff;
+        .contact-info a {
+            background-color: #25d366;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            margin-right: 20px;
         }
 
-        /* Styles pour les images */
-        .section-image {
+        .contact-info span {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
             width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            bottom: 0;
         }
 
-        /* Animation d'agrandissement des images au survol */
-        .section-image:hover {
-            transform: scale(1.05);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Mo-Djib Consulting</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">ACCUEIL</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">FORMATIONS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">AUDIT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">ACCOMPAGNEMENT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">E-PACK HYGIÈNE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">ACTUALITÉS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">CONTACTEZ-NOUS</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Grande image -->
-<section class="big-image">
-    <img src="1620768752769.jpg" class="section-image" alt="Image">
-</section>
-
-<!-- Titre Bienvenue -->
-<section class="welcome-message section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1 class="gold-text">Bienvenue chez Mo-Djib Consulting</h1>
-                <p>Votre partenaire mondial pour la qualité, l'hygiène et la sécurité alimentaire</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section avec texte et image -->
-<section class="about-section section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="rectangle">
-                    <h2>Plus de 1 ans d’expériences</h2>
-                    <p>Votre expert en qualité, hygiène et sécurité des aliments</p>
-                    <p>MO-DJIB CONSULTING est un cabinet de conseil, d’audit et de formation dans le domaine de la qualité, l’hygiène et la sécurité des denrées alimentaires. Notre équipe vous accompagne : porteurs de projets et chefs d’entreprise quelque soit votre type d’activité : du snack à l’industrie agro-alimentaire, en passant par la restauration commerciale, collective, la distribution et les métiers de bouche (boulangerie, patisserie, boucherie, charcuterie,..)</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <img src="1697909151559 (1).jpg" class="section-image" alt="Image">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Nos Services -->
-<section class="our-services section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="rectangle">
-                    <h2>Nos Services</h2>
-                    <p>Nous sommes à votre écoute</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="rectangle">
-                            <i class="icon fas fa-chalkboard-teacher"></i>
-                            <h3>Former</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="rectangle">
-                            <i class="icon fas fa-clipboard-check"></i>
-                            <h3>Auditer</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="rectangle">
-                            <i class="icon fas fa-handshake"></i>
-                            <h3>Accompagner</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Qui sommes-nous -->
-<section class="who-we-are section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="rectangle">
-                    <h2>Qui sommes-nous ?</h2>
-                    <p>MO-DJIB CONSULTING, les experts dont vous avez besoin</p>
-                    <p>Notre expérience professionnelle nous permet de vous apporter les meilleurs conseils et expertises en sécurité alimentaire quelque soit votre projet ou votre activité.</p>
+    <header>
+        <img src="https://gist.github.com/assets/168087487/3937ec2f-36a3-4158-8638-f5a49547f06c" alt="Logo Mo-Djib Consulting" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="#"><i class="fas fa-concierge-bell"></i> Nos Services</a>
                     <ul>
-                        <li>Maîtrise de la réglementation en vigueur</li>
-                        <li>Mise en place des process</li>
-                        <li>Accompagnement des équipes</li>
+                        <li><a href="#"><i class="fas fa-user-graduate"></i> Former</a></li>
+                        <li><a href="#"><i class="fas fa-clipboard-check"></i> Auditer</a></li>
+                        <li><a href="#"><i class="fas fa-handshake"></i> Accompagner</a></li>
                     </ul>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <img src="1710097249066.jpg" class="section-image" alt="Image">
-            </div>
-        </div>
-    </div>
+                </li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> Qui sommes-nous ?</a></li>
+                <li><a href="#"><i class="fas fa-box"></i> Notre Pack Hygiène</a></li>
+                <li><a href="#"><i class="fas fa-newspaper"></i> Actualités</a></li>
+                <li><a href="#"><i class="fas fa-handshake"></i> Partenaires</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Contactez-nous</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h1>Bienvenue chez Mo-Djib Consulting</h1>
+        <p>Votre partenaire mondial pour la qualité, l'hygiène et la sécurité alimentaire</p>
+        <div class="transparent-rectangle">
+            <h3>Plus de 1 an d’expériences</h3>
+            <p>Votre expert en qualité, hygiène et sécurité des aliments</
+<div class="contact-info">
+<span>Prendre RDV:</span>
+<a href="https://wa.me/message/WZHC7CEMDMMXL1"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+<span>+253 77 01 70 37</span>
+</div>
+</div>
+<h2>Nos Services</h2>
+<p>Nous sommes à votre écoute</p>
+<div class="service-list">
+<div class="service-item">
+<h3>Former</h3>
+<p>Formations spécifiques en hygiène alimentaire selon votre activité.</p>
+</div>
+<div class="service-item">
+<h3>Auditer</h3>
+<p>Audits réguliers ou ponctuels pour vérifier votre plan HACCP.</p>
+</div>
+<div class="service-item">
+<h3>Accompagner</h3>
+<p>Accompagnement pour la mise en place de plans et processus hygiéniques.</p>
+</div>
+</div>
+<h2>Qui sommes-nous ?</h2>
+<p>MO-DJIB CONSULTING, les experts dont vous avez besoin</p>
+<p>Notre expérience professionnelle nous permet de vous apporter les meilleurs conseils et expertises en sécurité alimentaire quel que soit votre projet ou votre activité.</p>
+<ul>
+<li>Maîtrise de la réglementation en vigueur</li>
+<li>Mise en place de process</li>
+<li>Accompagnement des équipes</li>
+</ul>
+<img src=".........." alt="Image de notre équipe">
+<h2>Notre Pack Hygiène</h2>
+<p>Inspection d'hygiène, formation HACCP, audit et accompagnement</p>
+<h3>Formations</h3>
+<p>MO-DJIB CONSULTING vous propose des formations en hygiène alimentaire spécifiques selon le type d’activité; restauration commerciale, collective, petite enfance, … une formation bonnes pratiques d’hygiène, et des formations HACCP et ISO22000 destinées aux industries agro-alimentaires.</p>
+<h3>Audits</h3>
+<p>Dans le cadre du système de vérification du plan HACCP, le Cabinet MO-DJIB CONSULTING peut vous accompagner sur l’année grâce à des audits réguliers ou de façon ponctuelle avec suivi des actions correctives incluant le suivi des analyses bactériologiques. Faites-nous confiance afin d’être prêt en cas de visite par les services officiels de l’état. En fonction de vos objectifs, notre équipe d’experts vous accompagne. Contactez-nous !</p>
+<h3>Accompagnement</h3>
+<p>Bonnes Pratiques d’Hygiène, Plan HACCP, traçabilité et Gestion des produits non conformes… Comptez sur nous pour vous accompagner pour votre dossier plan de maîtrise sanitaire, ou dossier d’agrément sanitaire, votre SMSDA ou votre DUERP. Nous pouvons également vous proposer une solution numérique pour la digitalisation de vos auto-contrôles réglementaires avec sondes connectées.</p>
+<h2>Contactez-nous</h2>
+<p>Vous souhaitez en savoir plus sur nos services ou discuter de vos besoins spécifiques en matière de qualité, d'hygiène et de sécurité alimentaire ? N'hésitez pas à nous contacter dès aujourd'hui. Notre équipe est là pour répondre à toutes vos questions et vous aider à atteindre vos objectifs. Chez Mo-Djib Consulting, votre succès est notre priorité.</p>
 </section>
-
-<!-- Section Notre Pack Hygiène -->
-<section class="pack-hygiene section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="rectangle">
-                    <h2>Notre Pack Hygiène</h2>
-                    <p>Inspection d'hygiène, formation HACCP, audit et accompagnement</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Nos Services -->
-<section class="our-services section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="rectangle">
-                    <h3>Formations</h3>
-                    <p>MO-DJIB CONSULTING vous propose des formations en hygiène alimentaire spécifiques selon le type d’activité; restauration commerciale, collective, petite enfance, …une formation bonnes pratiques d’hygiène, et des formations HACCP et ISO22000 destinées aux industries agro-alimentaires.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="rectangle">
-                    <h3>Audits</h3>
-                    <p>Dans le cadre du système de vérification du plan HACCP, le Cabinet MO-DJIB CONSULTING peut vous accompagner sur l’année grâce à des audits réguliers ou de façon ponctuelle avec suivi des actions correctives incluant le suivi des analyses bactériologiques. Faites nous confiance afin d’être prêt en cas de visite par les services officiels de l’état. En fonction de vos objectifs, notre équipe d’experts vous accompagne. Contactez-nous !</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="rectangle">
-                    <h3>Accompagnement</h3>
-                    <p>Bonnes Pratiques d’Hygiène, Plan HACCP, traçabilité et Gestion des produits non conformes… Comptez sur nous pour vous accompagner pour votre dossier plan de maîtrise sanitaire, ou dossier d’agrément sanitaire, votre SMSDA ou votre DUERP. Nous pouvons également vous proposer une solution numérique pour la digitalisation de vos auto-contrôles réglementaires avec sondes connectées.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Section Contactez-nous -->
-<section class="contact-us section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="rectangle">
-                    <h2>Contactez-nous</h2>
-                    <p>Vous souhaitez en savoir plus sur nos services ou discuter de vos besoins spécifiques en matière de qualité, d'hygiène et de sécurité alimentaire ? N'hésitez pas à nous contacter dès aujourd'hui. Notre équipe est là pour répondre à toutes vos questions et vous aider à atteindre vos objectifs. Chez Mo-Djib Consulting, votre succès est notre priorité.</p>
-                    <p>© 2024 Mo-Djib Consulting. Tous droits réservés.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Bootstrap Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<footer>
+© 2024 Mo-Djib Consulting. Tous droits réservés.
+</footer>
 </body>
 </html>
