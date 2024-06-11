@@ -34,7 +34,7 @@
         }
 
         header img.logo {
-            height: 80px;
+            height: 80px; /* Taille du logo */
             margin-right: 20px;
         }
 
@@ -81,11 +81,12 @@
         }
 
         section {
-            padding: 120px 20px 20px;
+            padding: 120px 20px 20px; /* Espace ajouté en haut pour éviter l'overlap avec le header */
             max-width: 1200px;
             margin: auto;
-            background-color: #f5f5f5;
+            background-color: rgba(255, 255, 255, 0.9);
             text-align: center;
+            animation: fadeIn 1s;
         }
 
         section h1 {
@@ -106,6 +107,11 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            transition: transform 0.5s ease;
+        }
+
+        .transparent-rectangle:hover {
+            transform: scale(1.05);
         }
 
         .transparent-rectangle h3 {
@@ -153,10 +159,12 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
+                transform: translateY(-20px);
             }
 
             to {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -179,16 +187,18 @@
                 <li><a href="#"><i class="fas fa-box"></i> Notre Pack Hygiène</a></li>
                 <li><a href="#"><i class="fas fa-newspaper"></i> Actualités</a></li>
                 <li><a href="#"><i class="fas fa-handshake"></i> Partenaires</a></li>
-                <li><a href="#"><i class="fas fa-envelope"></i> Contactez-nous</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section>
-        <h1>Bienvenue chez Mo-Djib Consulting</h1>
-        <p>Votre partenaire mondial pour la qualité, l'hygiène et la sécurité alimentaire</p>
-        <div class="transparent-rectangle">
-            <h3>Plus de 1 an d’expériences</h3>
-            <p>Votre expert en qualité, hygiène et sécurité des aliments</
+                <li><a href="#"><i class="fas fa-envelope"></i>
+Contactez-nous</a></li>
+</ul>
+</nav>
+</header>
+<section>
+<h1>Bienvenue chez Mo-Djib Consulting</h1>
+<p>Votre partenaire mondial pour la qualité, l'hygiène et la sécurité alimentaire</p>
+<div class="transparent-rectangle">
+<h3>Plus de 1 an d’expériences</h3>
+<p>Votre expert en qualité, hygiène et sécurité des aliments</p>
+<p>MO-DJIB CONSULTING est un cabinet de conseil, d’audit et de formation dans le domaine de la qualité, l’hygiène et la sécurité des denrées alimentaires. Notre équipe vous accompagne : porteurs de projets et chefs d’entreprise quel que soit votre type d’activité : du snack à l’industrie agro-alimentaire, en passant par la restauration commerciale, collective, la distribution et les métiers de bouche (boulangerie, pâtisserie,boucherie, charcuterie, etc.)</p>
 <div class="contact-info">
 <span>Prendre RDV:</span>
 <a href="https://wa.me/message/WZHC7CEMDMMXL1"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -219,7 +229,7 @@
 <li>Mise en place de process</li>
 <li>Accompagnement des équipes</li>
 </ul>
-<img src=".........." alt="Image de notre équipe">
+<img src="images/equipe.jpg" alt="Image de notre équipe">
 <h2>Notre Pack Hygiène</h2>
 <p>Inspection d'hygiène, formation HACCP, audit et accompagnement</p>
 <h3>Formations</h3>
@@ -234,5 +244,6 @@
 <footer>
 © 2024 Mo-Djib Consulting. Tous droits réservés.
 </footer>
+
 </body>
 </html>
