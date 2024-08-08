@@ -75,7 +75,7 @@
             padding: 20px;
             margin: 10px;
             width: 100mm; /* Ajuste la largeur selon la taille de ton étiquette */
-            height: 70mm; /* Ajuste la hauteur selon la taille de ton étiquette */
+            height: 80mm; /* Ajuste la hauteur selon la taille de ton étiquette */
             box-sizing: border-box;
             background-color: #fff;
             display: inline-block;
@@ -187,17 +187,27 @@
         <br><br>
 
         <label for="date">Date (AAAAMMJJ) :</label>
-        <input type="text" id="date" value="20240808">
+        <input type="text" id="date" value="XXXX-XX-XX">
 
         <br><br>
 
         <label for="time">Heure (HHMMSS) :</label>
-        <input type="text" id="time" value="123000">
+        <input type="text" id="time" value="00h00">
 
         <br><br>
 
         <label for="checkDigit">Chiffre de contrôle (optionnel) :</label>
         <input type="text" id="checkDigit" placeholder="Calculé automatiquement si vide">
+
+        <br><br>
+
+        <label for="startNumber">Numéro de départ :</label>
+        <input type="number" id="startNumber" value="1">
+
+        <br><br>
+
+        <label for="includeLabelNumber">Inclure numéro d'étiquette :</label>
+        <input type="checkbox" id="includeLabelNumber" checked>
 
         <br><br>
 
@@ -233,18 +243,26 @@
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
             const userCheckDigit = document.getElementById('checkDigit').value;
+            const startNumber = parseInt(document.getElementById('startNumber').value, 10);
+            const includeLabelNumber = document.getElementById('includeLabelNumber').checked;
             const labelList = document.getElementById('labelList');
 
             labelList.innerHTML = ''; // Clear the list
 
             for (let i = 0; i < numBarcodes; i++) {
-                const productCode = String(i + 1).padStart(3, '0'); // Pad product code with leading zeros if necessary
-                const barcode = `${countryPrefix}${companyCode}${productCategory}${productCode}${date}${time}`;
+                const productCode = String(startNumber + i).padStart(3, '0'); // Pad product code with leading zeros if necessary
+                const barcode = `${countryPrefix}${productCategory}${productCode}`;
                 const checkDigit = userCheckDigit !== "" ? userCheckDigit : generateCheckDigit(barcode);
                 const fullBarcode = `${barcode}${checkDigit}`;
                 const label = document.createElement('div');
                 label.className = 'label';
-                label.innerHTML = `<strong>${clientName}</strong><br><svg class="barcode"></svg><br>Date: ${date}<br>Heure: ${time}`;
+
+                if (includeLabelNumber) {
+                    label.innerHTML = `<strong>${clientName}</strong><br><svg class="barcode"></svg><br>Date: ${date}<br>Heure: ${time}<br>Code de l'entreprise: ${companyCode}<br>Numéro d'étiquette: ${startNumber + i}`;
+                } else {
+                    label.innerHTML = `<strong>${clientName}</strong><br><svg class="barcode"></svg><br>Date: ${date}<br>Heure: ${time}<br>Code de l'entreprise: ${companyCode}`;
+                }
+
                 labelList.appendChild(label);
 
                 JsBarcode(label.querySelector('.barcode'), fullBarcode, {
