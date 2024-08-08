@@ -91,8 +91,6 @@
         }
 
         .barcode {
-            font-family: 'IDAutomationHC39M', sans-serif;
-            font-size: 32px; /* Ajuste la taille selon tes besoins */
             display: block;
             text-align: center;
             margin: 10px 0;
@@ -157,6 +155,7 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -245,8 +244,15 @@
                 const fullBarcode = `${barcode}${checkDigit}`;
                 const label = document.createElement('div');
                 label.className = 'label';
-                label.innerHTML = `<strong>${clientName}</strong><br><span class="barcode">*${fullBarcode}*</span><br>Date: ${date}<br>Heure: ${time}`;
+                label.innerHTML = `<strong>${clientName}</strong><br><svg class="barcode"></svg><br>Date: ${date}<br>Heure: ${time}`;
                 labelList.appendChild(label);
+
+                JsBarcode(label.querySelector('.barcode'), fullBarcode, {
+                    format: "CODE128",
+                    width: 2,
+                    height: 50,
+                    displayValue: false
+                });
             }
         }
     </script>
