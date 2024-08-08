@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'Étiquettes de Codes-Barres</title>
+    <style>
+        @font-face {
+            font-family: 'IDAutomationHC39M';
+            src: url('https://example.com/path/to/IDAutomationHC39M.ttf') format('truetype'); /* Remplace par le chemin réel vers la police */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .barcode {
+            font-family: 'IDAutomationHC39M', sans-serif;
+            font-size: 24px; /* Ajuste la taille selon tes besoins */
+            display: block;
+            text-align: center;
+        }
+
+        .label {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 0;
+            width: 90mm; /* Ajuste la largeur selon la taille de ton étiquette */
+            height: 50mm; /* Ajuste la hauteur selon la taille de ton étiquette */
+            box-sizing: border-box;
+            float: left;
+            page-break-inside: avoid; /* Évite les coupures de page dans l'impression */
+            overflow: hidden; /* Assure que le contenu ne dépasse pas */
+        }
+
+        .label-list {
+            width: 100%;
+            column-width: 90mm; /* Largeur de chaque étiquette */
+            column-gap: 10mm; /* Espace entre les étiquettes */
+        }
+
+        .print-button {
+            margin-top: 20px;
+        }
+
+        @media print {
+            .container {
+                width: 100%;
+                padding: 0;
+            }
+
+            .label {
+                page-break-inside: avoid;
+                float: none;
+                display: inline-block;
+            }
+
+            .label-list {
+                column-count: 3; /* Ajuste le nombre de colonnes pour s'adapter à la taille de la feuille */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CABINET MO-DJB CONSULTING</h1>
+
+        <label for="clientName">Nom du client :</label>
+        <input type="text" id="clientName" value="ClientX">
+
+        <br><br>
+
+        <label for="numBarcodes">Nombre de codes-barres à générer :</label>
+        <input type="number" id="numBarcodes" value="100">
+
+        <br><br>
+
+        <label for="countryPrefix">Préfixe du pays :</label>
+        <input type="text" id="countryPrefix" value="611">
+
+        <br><br>
+
+        <label for="companyCode">Code de l'entreprise :</label>
+        <input type="text" id="companyCode" value="LM">
+
+        <br><br>
+
+        <label for="productCategory">Code de la catégorie de produit :</label>
+        <input type="text" id="productCategory" value="01">
+
+        <br><br>
+
+        <label for="date">Date (AAAAMMJJ) :</label>
+        <input type="text" id="date" value="20240808">
+
+        <br><br>
+
+        <label for="time">Heure (HHMMSS) :</label>
+        <input type="text" id="time" value="123000">
+
+        <br><br>
+
+        <label for="checkDigit">Chiffre de contrôle (optionnel) :</label>
+        <input type="text" id="checkDigit" placeholder="Calculé automatiquement si vide">
+
+        <br><br>
+
+        <button onclick="generateLabels()">Générer les Étiquettes</button>
+
+        <h2>Étiquettes Générées :</h2>
+        <div id="labelList" class="label-list"></div>
+
+        <button class="print-button" onclick="window.print()">Imprimer les Étiquettes</button>
+    </div>
+
+    <script>
+        function generateCheckDigit(barcode) {
+            let sum = 0;
+            for (let i = 0; i < barcode.length; i++) {
+                let num = parseInt(barcode[i], 10);
+                if (i % 2 === 0) {
+                    sum += num;
+                } else {
+                    sum += num * 3;
+                }
+            }
+            let checkDigit = (10 - (sum % 10)) % 10;
+            return checkDigit;
+        }
+
+        function generateLabels() {
+            const clientName = document.getElementById('clientName').value;
+            const numBarcodes = parseInt(document.getElementById('numBarcodes').value, 10);
+            const countryPrefix = document.getElementById('countryPrefix').value;
+            const companyCode = document.getElementById('companyCode').value;
+            const productCategory = document.getElementById('productCategory').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const userCheckDigit = document.getElementById('checkDigit').value;
+            const labelList = document.getElementById('labelList');
+
+            labelList.innerHTML = ''; // Clear the list
+
+            for (let i = 0; i < numBarcodes; i++) {
+                const productCode = String(i + 1).padStart(3, '0'); // Pad product code with leading zeros if necessary
+                const barcode = `${countryPrefix}${companyCode}${productCategory}${productCode}${date}${time}`;
+                const checkDigit = userCheckDigit !== "" ? userCheckDigit : generateCheckDigit(barcode);
+                const fullBarcode = `${barcode}${checkDigit}`;
+                const label = document.createElement('div');
+                label.className = 'label';
+                label.innerHTML = `<strong>${clientName}</strong><br><span class="barcode">*${fullBarcode}*</span><br>Date: ${date}<br>Heure: ${time}`;
+                labelList.appendChild(label);
+            }
+        }
+    </script>
+</body>
+</html>
