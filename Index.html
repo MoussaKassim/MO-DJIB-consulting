@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MO-DJIB CONSULTING</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .login-container, .homepage-container {
+            display: none;
+        }
+        .login-container.active, .homepage-container.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: opacity 1s ease-in-out;
+        }
+        .login-container {
+            background-image: url('https://tcisys.com/blog/wp-content/uploads/2018/10/HACCP2.jpg'); /* Remplacez par l'URL de votre image */
+            background-size: cover;
+            background-position: center;
+            background-color: #1a1a1a;
+        }
+        .login-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(0.95);
+            animation: scaleUp 0.5s forwards ease-out;
+        }
+        @keyframes scaleUp {
+            to {
+                transform: scale(1);
+            }
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #333;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #777;
+        }
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 30px);
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .error-message {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .homepage-container {
+            background-image: url('https://gist.github.com/user-attachments/assets/f3e64602-533e-44c7-aeb8-15c62d36984c'); /* Remplacez par l'URL de votre image */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+        }
+        .header {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .header .logo {
+            display: flex;
+            align-items: center;
+        }
+        .header .logo img {
+            height: 60px;
+            margin-right: 20px;
+        }
+        .header h1 {
+            font-size: 2.2em;
+            margin: 0;
+        }
+        .client-info {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: #333;
+            transition: transform 0.3s ease;
+        }
+        .client-info:hover {
+            transform: scale(1.02);
+        }
+        .client-info div {
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .applications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        .application {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            color: #333;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .application:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+        .application::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #007bff;
+            transition: height 0.3s ease;
+        }
+        .application:hover::before {
+            height: 100%;
+        }
+        .application h3 {
+            margin-bottom: 10px;
+            font-size: 1.6em;
+        }
+        .application p {
+            font-size: 1.1em;
+        }
+        .application i {
+            font-size: 3.5em;
+            color: #007bff;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        .application:hover i {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container active" id="login-container">
+    <div class="login-box">
+        <h1>Bienvenue chez MO-DJIB CONSULTING</h1>
+        <p>Votre partenaire en hygiène et sécurité des denrées alimentaires</p>
+        <input type="text" id="username" placeholder="Identifiant">
+        <input type="password" id="password" placeholder="Mot de passe">
+        <button onclick="login()">Se connecter</button>
+        <p id="error-message" class="error-message"></p>
+        <footer>
+            © 2024 MO-DJIB CONSULTING<br>
+            Adresse: rue Moscou Ibn Sina, Djibouti<br>
+            Téléphone: +25377017037<br>
+            Email: modjibconsulting@gmail.com<br>
+            Réseaux sociaux: Facebook, LinkedIn, Twitter
+        </footer>
+    </div>
+</div>
+
+<div class="homepage-container" id="homepage-container">
+    <div class="header">
+        <div class="logo">
+            <img src="https://gist.github.com/user-attachments/assets/642a4008-d1a0-40dc-abd7-a4da39701363" alt="Logo Le Moulin"> <!-- Remplacez par le logo du client -->
+            <h1>LE MOULIN</h1>
+        </div>
+    </div>
+
+    <div class="client-info">
+        <div>
+            <p><strong>Adresse :</strong> 123 Rue de l'Exemple, Djibouti</p>
+            <p><strong>Téléphone :</strong> +25377000000</p>
+            <p><strong>Email :</strong> lemoulin@example.com</p>
+        </div>
+    </div>
+
+    <h2>Nos Applications</h2>
+    <div class="applications">
+        <div class="application">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Norme HACCP</h3
+                        <p>Suivez et appliquez les normes HACCP pour une sécurité alimentaire optimale.</p>
+        </div>
+        <div class="application">
+            <i class="fas fa-thermometer-half"></i>
+            <h3>Relevé de Température</h3>
+            <p>Surveillez les températures pour assurer la conformité des denrées(https://moussakassim.github.io/MO-DJIB-consulting/Contr%C3%B4le_teperature.html).</p>
+        </div>
+        <div class="application">
+            <i class="fas fa-check-circle"></i>
+            <h3>Contrôle à la Réception</h3>
+            <p>Vérifiez les produits à leur arrivée pour garantir leur qualité.</p>
+        </div>
+        <div class="application">
+            <i class="fas fa-broom"></i>
+            <h3>Nettoyage & Désinfection</h3>
+            <p>Assurez-vous de la propreté des installations avec des procédures efficaces.</p>
+        </div>
+        <div class="application">
+            <i class="fas fa-user-shield"></i>
+            <h3>Hygiène Personnelle</h3>
+            <p>Maintenez les standards d'hygiène pour le personnel en toute circonstance.</p>
+        </div>
+        <div class="application">
+            <i class="fas fa-truck"></i>
+            <h3>Livraison</h3>
+            <p>Suivez les protocoles pour des livraisons sûres et efficaces.</p>
+        </div>
+        <div class="application">
+            <i class="fas fa-barcode"></i>
+            <h3>Générateur de Code-barres</h3>
+            <p>Créez des codes-barres pour une gestion efficace des stocks (https://moussakassim.github.io/MO-DJIB-consulting/LMCODEBARRE.html).</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('error-message');
+
+        if (username === 'LEMOULIN' && password === '1234') {
+            document.getElementById('login-container').classList.remove('active');
+            document.getElementById('homepage-container').classList.add('active');
+        } else {
+            errorMessage.textContent = "Identifiant ou mot de passe incorrect.";
+        }
+    }
+</script>
+
+</body>
+  </html>
+  
