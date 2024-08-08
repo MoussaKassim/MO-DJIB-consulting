@@ -128,6 +128,20 @@
             transform: scale(0.98);
         }
 
+        .login-container,
+        .main-container {
+            display: none;
+            text-align: center;
+        }
+
+        .login-container {
+            margin-top: 20%;
+        }
+
+        .login-container input {
+            width: 200px;
+        }
+
         @media print {
             body {
                 background-color: #fff;
@@ -158,68 +172,97 @@
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>CABINET MO-DJB CONSULTING</h1>
+    <div class="login-container">
+        <h2>Connexion</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Identifiant" required>
+            <br><br>
+            <input type="password" id="password" placeholder="Mot de passe" required>
+            <br><br>
+            <button type="submit">Se Connecter</button>
+        </form>
+        <p id="loginError" style="color: red;"></p>
+    </div>
 
-        <label for="clientName">Nom du client :</label>
-        <input type="text" id="clientName" value="ClientX">
+    <div class="main-container">
+        <div class="container">
+            <h1>CABINET MO-DJB CONSULTING</h1>
 
-        <br><br>
+            <label for="clientName">Nom du client :</label>
+            <input type="text" id="clientName" value="ClientX">
 
-        <label for="numBarcodes">Nombre de codes-barres à générer :</label>
-        <input type="number" id="numBarcodes" value="100">
+            <br><br>
 
-        <br><br>
+            <label for="numBarcodes">Nombre de codes-barres à générer :</label>
+            <input type="number" id="numBarcodes" value="100">
 
-        <label for="countryPrefix">Préfixe du pays :</label>
-        <input type="text" id="countryPrefix" value="253">
+            <br><br>
 
-        <br><br>
+            <label for="countryPrefix">Préfixe du pays :</label>
+            <input type="text" id="countryPrefix" value="253">
 
-        <label for="companyCode">Code de l'entreprise :</label>
-        <input type="text" id="companyCode" value="LM">
+            <br><br>
 
-        <br><br>
+            <label for="companyCode">Code de l'entreprise :</label>
+            <input type="text" id="companyCode" value="LM">
 
-        <label for="productCategory">Code de la catégorie de produit :</label>
-        <input type="text" id="productCategory" value="01">
+            <br><br>
 
-        <br><br>
+            <label for="productCategory">Code de la catégorie de produit :</label>
+            <input type="text" id="productCategory" value="01">
 
-        <label for="date">Date (AAAAMMJJ) :</label>
-        <input type="text" id="date" value="XXXX-XX-XX">
+            <br><br>
 
-        <br><br>
+            <label for="date">Date (AAAAMMJJ) :</label>
+            <input type="text" id="date" value="XXXX-XX-XX">
 
-        <label for="time">Heure (HHMMSS) :</label>
-        <input type="text" id="time" value="00h00">
+            <br><br>
 
-        <br><br>
+            <label for="time">Heure (HHMMSS) :</label>
+            <input type="text" id="time" value="00h00">
 
-        <label for="checkDigit">Chiffre de contrôle (optionnel) :</label>
-        <input type="text" id="checkDigit" placeholder="Calculé automatiquement si vide">
+            <br><br>
 
-        <br><br>
+            <label for="checkDigit">Chiffre de contrôle (optionnel) :</label>
+            <input type="text" id="checkDigit" placeholder="Calculé automatiquement si vide">
 
-        <label for="startNumber">Numéro de départ :</label>
-        <input type="number" id="startNumber" value="1">
+            <br><br>
 
-        <br><br>
+            <label for="startNumber">Numéro de départ :</label>
+            <input type="number" id="startNumber" value="1">
 
-        <label for="includeLabelNumber">Inclure numéro d'étiquette :</label>
-        <input type="checkbox" id="includeLabelNumber" checked>
+            <br><br>
 
-        <br><br>
+            <label for="includeLabelNumber">Inclure numéro d'étiquette :</label>
+            <input type="checkbox" id="includeLabelNumber" checked>
 
-        <button onclick="generateLabels()">Générer les Étiquettes</button>
+            <br><br>
 
-        <h2>Étiquettes Générées :</h2>
-        <div id="labelList" class="label-list"></div>
+            <button onclick="generateLabels()">Générer les Étiquettes</button>
 
-        <button class="print-button" onclick="window.print()">Imprimer les Étiquettes</button>
+            <h2>Étiquettes Générées :</h2>
+            <div id="labelList" class="label-list"></div>
+
+            <button class="print-button" onclick="window.print()">Imprimer les Étiquettes</button>
+        </div>
     </div>
 
     <script>
+        const correctUsername = "admin"; // Remplace par le vrai identifiant
+        const correctPassword = "password"; // Remplace par le vrai mot de passe
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === correctUsername && password === correctPassword) {
+                document.querySelector('.login-container').style.display = 'none';
+                document.querySelector('.main-container').style.display = 'block';
+            } else {
+                document.getElementById('loginError').textContent = 'Identifiant ou mot de passe incorrect.';
+            }
+        });
+
         function generateCheckDigit(barcode) {
             let sum = 0;
             for (let i = 0; i < barcode.length; i++) {
