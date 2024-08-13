@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrôle de Température HACCP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .warning {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .alert {
+            animation: slideIn 0.5s ease-out;
+        }
+    </style>
+    <!-- Inclusion de la bibliothèque SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contrôle Température HACCP</h1>
+        <p>Veillez à suivre les instructions HACCP pour un relevé correct.</p>
+        <form id="temperatureForm">
+            <label for="time">Moment de la journée :</label>
+            <select id="time" required>
+                <option value="matin">Matin</option>
+                <option value="apres-midi">Après-midi</option>
+            </select>
+
+            <label for="tempType">Type de froid :</label>
+            <select id="tempType" required onchange="adjustTemperatureRange()">
+                <option value="positif">Froid Positif</option>
+                <option value="negatif">Froid Négatif</option>
+            </select>
+
+            <label for="deviceNumber">Numéro de l'appareil :</label>
+            <input type="text" id="deviceNumber" placeholder="Ex: Frigo 1" required>
+
+            <label for="date">Date :</label>
+            <input type="date" id="date" required>
+
+            <label for="temperature">Température (°C) :</label>
+            <input type="number" id="temperature" step="0.1" required>
+
+            <label for="personName">Nom de la personne :</label>
+            <input type="text" id="personName" required>
+
+            <div id="warningMessage" class="warning"></div>
+
+            <button type="button" onclick="saveTemperature()">Sauvegarder le relevé</button>
+            <button type="button" onclick="exportDataToExcel()">Exporter les données du mois</button>
+        </form>
+    </div>
+
+    <script>
+        let tempRange = {min: 0, max: 4};  // Default range for cold positive
+
+        function adjustTemperatureRange() {
+            const tempType = document.getElementById('tempType').value;
+            if (tempType === 'positif') {
+                tempRange = {min: 0, max: 4};  // Adjust to cold positive range
+            } else {
+                tempRange = {min: -20, max: 0};  // Adjust to cold negative range
+            }
+        }
+
+        function validateTemperature(temp) {
+            return temp >= tempRange.min && temp <= tempRange.max;
+        }
+
+        function saveTemperature() {
+            const time = document.getElementById('time').value;
+            const tempType = document.getElementById('tempType').value;
+            const deviceNumber = document.getElementById('deviceNumber').value;
+            const date = document.getElementById('date').value;
+            const temperature = parseFloat(document.getElementById('temperature').value);
+            const personName = document.getElementById('personName').value;
+
+            const warningMessage = document.getElementById('warningMessage');
+
+            if (!validateTemperature(temperature)) {
+                warningMessage.textContent = `Attention : La température est hors des limites HACCP (${tempRange.min}°C à ${tempRange.max}°C) pour ${tempType === 'positif' ? 'froid positif' : 'froid négatif'}.`;
+                warningMessage.classList.add('alert');
+                return;
+            } else {
+                warningMessage.textContent = '';
+            }
+
+            const entry = {
+                time: time,
+                tempType: tempType,
+                temperature: temperature,
+                date: date,
+                personName: personName
+            };
+
+            const monthKey = `${deviceNumber}_${date.split('-').slice(0, 2).join('_')}`;
+            const storedData = localStorage.getItem(monthKey);
+            let data = storedData ? JSON.parse(storedData) : [];
+
+            data.push(entry);
+
+            localStorage.setItem(monthKey, JSON.stringify(data));
+
+            alert("Relevé de température sauvegardé !");
+        }
+
+        function exportDataToExcel() {
+            const deviceNumber = document.getElementById('deviceNumber').value;
+            const date = document.getElementById('date').value;
+            const tempType = document.getElementById('tempType').value;
+
+            const monthKey = `${deviceNumber}_${date.split('-').slice(0, 2).join('_')}`;
+            const storedData = localStorage.getItem(monthKey);
+
+            if (storedData) {
+                const data = JSON.parse(storedData);
+
+                // Création du workbook
+                const workbook = XLSX.utils.book_new();
+
+                // Créer une nouvelle feuille pour le réfrigérateur/congélateur/chambre froide
+                const worksheetData = data.map(entry => ({
+                    "Numéro de l'appareil": deviceNumber,
+                    "Moment de la journée": entry.time,
+                    "Type de froid": entry.tempType,
+                    "Température (°C)": entry.temperature,
+                    "Date": entry.date,
+                    "Nom de la personne": entry.personName
+                }));
+
+                const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+                XLSX.utils.book_append_sheet(workbook, worksheet, `Appareil_${deviceNumber}`);
+
+                // Choisir le nom du fichier selon le type de froid
+                let filename;
+                if (tempType === 'positif') {
+                    filename = `Controle_Temperature_Froid_Positif_${monthKey}.xlsx`;
+                } else {
+                    filename = `Controle_Temperature_Froid_Negatif_${monthKey}.xlsx`;
+                }
+
+                // Sauvegarder le fichier
+                XLSX.writeFile(workbook, filename);
+            } else {
+                alert("Aucune donnée disponible pour ce mois.");
+            }
+        }
+    </script>
+</body>
+</html>
