@@ -163,27 +163,26 @@
                 tempType: tempType,
                 temperature: temperature,
                 date: date,
+                deviceNumber: deviceNumber,
                 personName: personName
             };
 
-            const monthKey = `${deviceNumber}_${date.split('-').slice(0, 2).join('_')}`;
-            const storedData = localStorage.getItem(monthKey);
+            // Sauvegarde des données dans localStorage
+            const storageKey = `temperatureRecords_${tempType}`;
+            const storedData = localStorage.getItem(storageKey);
             let data = storedData ? JSON.parse(storedData) : [];
 
             data.push(entry);
 
-            localStorage.setItem(monthKey, JSON.stringify(data));
+            localStorage.setItem(storageKey, JSON.stringify(data));
 
             alert("Relevé de température sauvegardé !");
         }
 
         function exportDataToExcel() {
-            const deviceNumber = document.getElementById('deviceNumber').value;
-            const date = document.getElementById('date').value;
             const tempType = document.getElementById('tempType').value;
-
-            const monthKey = `${deviceNumber}_${date.split('-').slice(0, 2).join('_')}`;
-            const storedData = localStorage.getItem(monthKey);
+            const storageKey = `temperatureRecords_${tempType}`;
+            const storedData = localStorage.getItem(storageKey);
 
             if (storedData) {
                 const data = JSON.parse(storedData);
@@ -191,26 +190,31 @@
                 // Création du workbook
                 const workbook = XLSX.utils.book_new();
 
-                // Créer une nouvelle feuille pour le réfrigérateur/congélateur/chambre froide
-                const worksheetData = data.map(entry => ({
-                    "Numéro de l'appareil": deviceNumber,
-                    "Moment de la journée": entry.time,
-                    "Type de froid": entry.tempType,
-                    "Température (°C)": entry.temperature,
-                    "Date": entry.date,
-                    "Nom de la personne": entry.personName
-                }));
+                // Regroupement des données par numéro d'appareil et création des feuilles correspondantes
+                const groupedData = data.reduce((acc, entry) => {
+                    if (!acc[entry.deviceNumber]) {
+                        acc[entry.deviceNumber] = [];
+                    }
+                    acc[entry.deviceNumber].push(entry);
+                    return acc;
+                }, {});
 
-                const worksheet = XLSX.utils.json_to_sheet(worksheetData);
-                XLSX.utils.book_append_sheet(workbook, worksheet, `Appareil_${deviceNumber}`);
+                for (let deviceNumber in groupedData) {
+                    const worksheetData = groupedData[deviceNumber].map(entry => ({
+                        "Numéro de l'appareil": entry.deviceNumber,
+                        "Moment de la journée": entry.time,
+                        "Type de froid": entry.tempType,
+                        "Température (°C)": entry.temperature,
+                        "Date": entry.date,
+                        "Nom de la personne": entry.personName
+                    }));
+
+                    const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+                    XLSX.utils.book_append_sheet(workbook, worksheet, `Appareil_${deviceNumber}`);
+                }
 
                 // Choisir le nom du fichier selon le type de froid
-                let filename;
-                if (tempType === 'positif') {
-                    filename = `Controle_Temperature_Froid_Positif_${monthKey}.xlsx`;
-                } else {
-                    filename = `Controle_Temperature_Froid_Negatif_${monthKey}.xlsx`;
-                }
+                const filename = `Controle_Temperature_${tempType}_${new Date().toISOString().slice(0, 10)}.xlsx`;
 
                 // Sauvegarder le fichier
                 XLSX.writeFile(workbook, filename);
