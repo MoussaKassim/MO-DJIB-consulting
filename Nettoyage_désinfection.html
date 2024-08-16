@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord HACCP - Nettoyage & Désinfection</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eaeaea;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .task-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+        }
+
+        .task-title {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .checkbox {
+            transform: scale(1.5);
+        }
+
+        .section-title {
+            text-align: left;
+            font-size: 1.2em;
+            color: #007BFF;
+            margin-top: 40px;
+        }
+
+        .task-list {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .task-list td {
+            background-color: #f4f4f4;
+        }
+
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Nettoyage & Désinfection HACCP - Restaurant</h1>
+
+        <div class="input-group">
+            <label for="employee-name">Nom de l'Employé:</label>
+            <input type="text" id="employee-name" placeholder="Entrez le nom de l'employé">
+        </div>
+
+        <div class="input-group">
+            <label for="restaurant-area">Partie du Restaurant:</label>
+            <select id="restaurant-area">
+                <option value="Cuisine">Cuisine</option>
+                <option value="Salle à Manger">Salle à Manger</option>
+                <option value="Toilettes">Toilettes</option>
+                <option value="Réserve">Réserve</option>
+                <option value="Entrée">Entrée</option>
+                <option value="Zones de Préparation">Zones de Préparation</option>
+                <option value="Chambre Froide">Chambre Froide</option>
+                <option value="Zone de Lavage">Zone de Lavage</option>
+            </select>
+        </div>
+
+        <!-- SECTION : CUISINE -->
+        <div class="section-title">Cuisine</div>
+        <table class="task-list">
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Tâche</th>
+                    <th>Image</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Surface de Travail</td>
+                    <td class="task-title">Nettoyage et désinfection des surfaces</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Surface" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Sol</td>
+                    <td class="task-title">Balayage et lavage du sol</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Sol" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Ustensiles</td>
+                    <td class="task-title">Nettoyage des ustensiles</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Ustensiles" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION : SALLE À MANGER -->
+        <div class="section-title">Salle à Manger</div>
+        <table class="task-list">
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Tâche</th>
+                    <th>Image</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tables & Chaises</td>
+                    <td class="task-title">Nettoyage et désinfection des tables et chaises</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Tables" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Sol</td>
+                    <td class="task-title">Balayage et lavage du sol</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Sol Salle à Manger" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                                        <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Buffet</td>
+                    <td class="task-title">Nettoyage et désinfection du buffet</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Buffet" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION : TOILETTES -->
+        <div class="section-title">Toilettes</div>
+        <table class="task-list">
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Tâche</th>
+                    <th>Image</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lavabo</td>
+                    <td class="task-title">Nettoyage et désinfection des lavabos</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Lavabo" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>WC</td>
+                    <td class="task-title">Nettoyage et désinfection des WC</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage WC" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Sol</td>
+                    <td class="task-title">Balayage et lavage du sol</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Sol Toilettes" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION : RÉSERVE -->
+        <div class="section-title">Réserve</div>
+        <table class="task-list">
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Tâche</th>
+                    <th>Image</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Étagères</td>
+                    <td class="task-title">Nettoyage et désinfection des étagères</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Étagères" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Sol</td>
+                    <td class="task-title">Balayage et lavage du sol</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Sol Réserve" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION : ZONE DE PRÉPARATION -->
+        <div class="section-title">Zone de Préparation</div>
+        <table class="task-list">
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Tâche</th>
+                    <th>Image</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Plan de Travail</td>
+                    <td class="task-title">Nettoyage et désinfection du plan de travail</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Plan de Travail" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Ustensiles</td>
+                    <td class="task-title">Nettoyage et désinfection des ustensiles</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Ustensiles Zone de Préparation" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SECTION : CHAMBRE FROIDE -->
+        <div class="section-title">Chambre Froide</div>
+        <table class="task-list">
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Tâche</th>
+                    <th>Image</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Étagères</td>
+                    
+                                        <td class="task-title">Nettoyage et désinfection des étagères</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Étagères Chambre Froide" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Sol</td>
+                    <td class="task-title">Balayage et lavage du sol</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Sol Chambre Froide" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Portes</td>
+                    <td class="task-title">Nettoyage et désinfection des portes</td>
+                    <td><img src="https://via.placeholder.com/60" alt="Nettoyage Portes Chambre Froide" class="task-image"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td><input type="checkbo
