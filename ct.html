@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contrôle de Température HACCP</title>
     <style>
+        /* Style similaire à ce que vous aviez déjà */
         body {
             font-family: Arial, sans-serif;
-            background: url('https://images.squarespace-cdn.com/content/v1/5706e13ff8baf375d876a967/1543431402851-TCQUOF46Y44AOQDB5VQJ/Cold+weather.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background-color: #f4f4f4;
             color: #333;
             margin: 0;
             padding: 0;
@@ -19,13 +19,12 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
-            animation: fadeIn 1s ease-in-out;
         }
 
         h1 {
@@ -57,7 +56,6 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
         button:hover {
@@ -70,27 +68,14 @@
             margin-top: 10px;
             text-align: center;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .alert {
-            animation: slideIn 0.5s ease-out;
-        }
     </style>
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
 
     <div class="container">
         <h1>Contrôle Température HACCP</h1>
-        <p>Veuillez suivre les instructions HACCP pour un relevé correct.</p>
+        <p>Veillez à suivre les instructions HACCP pour un relevé correct.</p>
         <form id="temperatureForm">
             <label for="time">Moment de la journée :</label>
             <select id="time" required>
@@ -99,7 +84,7 @@
             </select>
 
             <label for="tempType">Type de froid :</label>
-            <select id="tempType" required onchange="adjustTemperatureRange()">
+            <select id="tempType" required>
                 <option value="positif">Froid Positif</option>
                 <option value="negatif">Froid Négatif</option>
             </select>
@@ -119,27 +104,85 @@
             <div id="warningMessage" class="warning"></div>
 
             <button type="button" onclick="saveTemperature()">Sauvegarder le relevé</button>
+            <button type="button" onclick="handleAuthClick()">Connectez-vous à Google Sheets</button>
         </form>
     </div>
 
     <script>
-        let tempRange = {min: 0, max: 4};  // Default range for cold positive
-        const excelURL = "https://icgeborg-my.sharepoint.com/:x:/g/personal/kassim_icgeb_org/EW5GfubZqPZAtbDFXtcFpL4BoXq_MgvQgn856UNUVGZlLA?e=pkoYHo&nav=MTVfezAwMDAwMDAwLTAwMDEtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMH0";
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
 
-        function adjustTemperatureRange() {
-            const tempType = document.getElementById('tempType').value;
-            if (tempType === 'positif') {
-                tempRange = {min: 0, max: 4};  // Adjust to cold positive range
+        const CLIENT_ID = '356108697171-3b3ag1ga16ot9t65rhbo4da710uui8k1.apps.googleusercontent.com';
+        const API_KEY = 'YOUR_API_KEY'; // Replacez avec votre clé API
+        const SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
+        const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
+        const SPREADSHEET_ID = 'SPREADSHEET_ID'; // Remplacez par l'ID de votre feuille Google Sheets
+
+        function gapiLoaded() {
+            gapi.load('client', initializeGapiClient);
+        }
+
+        async function initializeGapiClient() {
+            await gapi.client.init({
+                apiKey: API_KEY,
+                discoveryDocs: [DISCOVERY_DOC],
+            });
+            gapiInited = true;
+        }
+
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: '', // Sera remplacé après l'autorisation
+            });
+            gisInited = true;
+        }
+
+        function handleAuthClick() {
+            tokenClient.callback = async (resp) => {
+                if (resp.error) {
+                    throw (resp);
+                }
+                await listMajors();  // Vous pouvez personnaliser cette fonction pour ajouter vos relevés de température
+            };
+
+            if (gapi.client.getToken() === null) {
+                // Demande de token
+                tokenClient.requestAccessToken({prompt: 'consent'});
             } else {
-                tempRange = {min: -20, max: 0};  // Adjust to cold negative range
+                // Token déjà récupéré
+                tokenClient.requestAccessToken({prompt: ''});
             }
         }
 
-        function validateTemperature(temp) {
-            return temp >= tempRange.min && temp <= tempRange.max;
+        async function listMajors() {
+            let response;
+            try {
+                response = await gapi.client.sheets.spreadsheets.values.get({
+                    spreadsheetId: SPREADSHEET_ID,
+                    range: 'Sheet1!A1:E10', // Exemple de plage à modifier
+                });
+            } catch (err) {
+                console.log(err.message);
+                return;
+            }
+
+            const range = response.result;
+            if (!range || !range.values || range.values.length == 0) {
+                console.log('Aucune donnée trouvée.');
+                return;
+            }
+
+            console.log('Données obtenues depuis Google Sheets:');
+            for (let i = 0; i < range.values.length; i++) {
+                const row = range.values[i];
+                console.log(row.join(', '));
+            }
         }
 
-        function saveTemperature() {
+        async function saveTemperature() {
             const time = document.getElementById('time').value;
             const tempType = document.getElementById('tempType').value;
             const deviceNumber = document.getElementById('deviceNumber').value;
@@ -147,43 +190,35 @@
             const temperature = parseFloat(document.getElementById('temperature').value);
             const personName = document.getElementById('personName').value;
 
-            const warningMessage = document.getElementById('warningMessage');
+            const values = [
+                [time, tempType, deviceNumber, date, temperature, personName]
+            ];
 
-            if (!validateTemperature(temperature)) {
-                warningMessage.textContent = `Attention : La température est hors des limites HACCP (${tempRange.min}°C à ${tempRange.max}°C) pour ${tempType === 'positif' ? 'froid positif' : 'froid négatif'}.`;
-                warningMessage.classList.add('alert');
-                return;
-            } else {
-                warningMessage.textContent = '';
-            }
-
-            const entry = {
-                time: time,
-                tempType: tempType,
-                temperature: temperature,
-                date: date,
-                deviceNumber: deviceNumber,
-                personName: personName
+            const body = {
+                values: values
             };
 
-            // Envoi des données vers le fichier Excel en ligne
-            fetch(excelURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(entry)
-            }).then(response => {
-                if (response.ok) {
-                    alert("Relevé de température sauvegardé dans Excel en ligne !");
-                } else {
-                    alert("Erreur lors de l'enregistrement des données.");
-                }
-            }).catch(error => {
-                console.error('Erreur:', error);
-                alert("Impossible de sauvegarder les données.");
-            });
+            try {
+                const response = await gapi.client.sheets.spreadsheets.values.append({
+                    spreadsheetId: SPREADSHEET_ID,
+                    range: 'Sheet1!A1',  // Changez selon la plage voulue
+                    valueInputOption: 'RAW',
+                    resource: body,
+                });
+
+                console.log(`${response.result.updates.updatedCells} cellules mises à jour.`);
+            } catch (err) {
+                console.log(err.message);
+            }
         }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            gapiLoaded();
+            gisLoaded();
+        });
     </script>
+
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
 </body>
 </html>
