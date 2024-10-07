@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contrôle de Température HACCP</title>
     <style>
-        /* Style similaire à ce que vous aviez déjà */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-image: url('https://images.squarespace-cdn.com/content/v1/5706e13ff8baf375d876a967/1543431402851-TCQUOF46Y44AOQDB5VQJ/Cold+weather.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
             color: #333;
             margin: 0;
             padding: 0;
@@ -25,6 +27,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
+            animation: fadeIn 1s ease-in-out;
         }
 
         h1 {
@@ -56,6 +59,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
@@ -68,8 +72,23 @@
             margin-top: 10px;
             text-align: center;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .alert {
+            animation: slideIn 0.5s ease-out;
+        }
     </style>
-    <script src="https://apis.google.com/js/api.js"></script>
+    <!-- Inclusion de la bibliothèque SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -84,7 +103,7 @@
             </select>
 
             <label for="tempType">Type de froid :</label>
-            <select id="tempType" required>
+            <select id="tempType" required onchange="adjustTemperatureRange()">
                 <option value="positif">Froid Positif</option>
                 <option value="negatif">Froid Négatif</option>
             </select>
@@ -104,85 +123,28 @@
             <div id="warningMessage" class="warning"></div>
 
             <button type="button" onclick="saveTemperature()">Sauvegarder le relevé</button>
-            <button type="button" onclick="handleAuthClick()">Connectez-vous à Google Sheets</button>
+            <button type="button" onclick="exportDataToExcel()">Exporter les données du mois</button>
         </form>
+        <a href="https://icgeborg-my.sharepoint.com/:x:/g/personal/kassim_icgeb_org/EW5GfubZqPZAtbDFXtcFpL4BoXq_MgvQgn856UNUVGZlLA?e=9UxrYA&nav=MTVfezAwMDAwMDAwLTAwMDEtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMH0" target="_blank" style="display: inline-block; margin-top: 20px; text-align: center; padding: 10px; background-color: #28a745; color: white; border-radius: 4px; text-decoration: none;">Accéder au fichier Excel</a>
     </div>
 
     <script>
-        let tokenClient;
-        let gapiInited = false;
-        let gisInited = false;
+        let tempRange = {min: 0, max: 4};  // Default range for cold positive
 
-        const CLIENT_ID = '356108697171-3b3ag1ga16ot9t65rhbo4da710uui8k1.apps.googleusercontent.com';
-        const API_KEY = 'YOUR_API_KEY'; // Replacez avec votre clé API
-        const SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
-        const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
-        const SPREADSHEET_ID = 'SPREADSHEET_ID'; // Remplacez par l'ID de votre feuille Google Sheets
-
-        function gapiLoaded() {
-            gapi.load('client', initializeGapiClient);
-        }
-
-        async function initializeGapiClient() {
-            await gapi.client.init({
-                apiKey: API_KEY,
-                discoveryDocs: [DISCOVERY_DOC],
-            });
-            gapiInited = true;
-        }
-
-        function gisLoaded() {
-            tokenClient = google.accounts.oauth2.initTokenClient({
-                client_id: CLIENT_ID,
-                scope: SCOPES,
-                callback: '', // Sera remplacé après l'autorisation
-            });
-            gisInited = true;
-        }
-
-        function handleAuthClick() {
-            tokenClient.callback = async (resp) => {
-                if (resp.error) {
-                    throw (resp);
-                }
-                await listMajors();  // Vous pouvez personnaliser cette fonction pour ajouter vos relevés de température
-            };
-
-            if (gapi.client.getToken() === null) {
-                // Demande de token
-                tokenClient.requestAccessToken({prompt: 'consent'});
+        function adjustTemperatureRange() {
+            const tempType = document.getElementById('tempType').value;
+            if (tempType === 'positif') {
+                tempRange = {min: 0, max: 4};  // Adjust to cold positive range
             } else {
-                // Token déjà récupéré
-                tokenClient.requestAccessToken({prompt: ''});
+                tempRange = {min: -20, max: 0};  // Adjust to cold negative range
             }
         }
 
-        async function listMajors() {
-            let response;
-            try {
-                response = await gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: SPREADSHEET_ID,
-                    range: 'Sheet1!A1:E10', // Exemple de plage à modifier
-                });
-            } catch (err) {
-                console.log(err.message);
-                return;
-            }
-
-            const range = response.result;
-            if (!range || !range.values || range.values.length == 0) {
-                console.log('Aucune donnée trouvée.');
-                return;
-            }
-
-            console.log('Données obtenues depuis Google Sheets:');
-            for (let i = 0; i < range.values.length; i++) {
-                const row = range.values[i];
-                console.log(row.join(', '));
-            }
+        function validateTemperature(temp) {
+            return temp >= tempRange.min && temp <= tempRange.max;
         }
 
-        async function saveTemperature() {
+        function saveTemperature() {
             const time = document.getElementById('time').value;
             const tempType = document.getElementById('tempType').value;
             const deviceNumber = document.getElementById('deviceNumber').value;
@@ -190,35 +152,311 @@
             const temperature = parseFloat(document.getElementById('temperature').value);
             const personName = document.getElementById('personName').value;
 
-            const values = [
-                [time, tempType, deviceNumber, date, temperature, personName]
-            ];
+            const warningMessage = document.getElementById('warningMessage');
 
-            const body = {
-                values: values
+            if (!validateTemperature(temperature)) {
+                warningMessage.textContent = `Attention : La température est hors des limites HACCP (${tempRange.min}°C à ${tempRange.max}°C) pour ${tempType === 'positif' ? 'froid positif' : 'froid négatif'}.`;
+                warningMessage.classList.add('alert');
+                return;
+            } else {
+                warningMessage.textContent = '';
+            }
+
+            const entry = {
+                time: time,
+                tempType: tempType,
+                temperature: temperature,
+                date: date,
+                deviceNumber: deviceNumber,
+                personName: personName
             };
 
-            try {
-                const response = await gapi.client.sheets.spreadsheets.values.append({
-                    spreadsheetId: SPREADSHEET_ID,
-                    range: 'Sheet1!A1',  // Changez selon la plage voulue
-                    valueInputOption: 'RAW',
-                    resource: body,
-                });
+            // Sauvegarde des données dans localStorage
+            const storageKey = `temperatureRecords_${tempType}`;
+            const storedData = localStorage.getItem(storageKey);
+            let data = storedData ? JSON.parse(storedData) : [];
 
-                console.log(`${response.result.updates.updatedCells} cellules mises à jour.`);
-            } catch (err) {
-                console.log(err.message);
+            data.push(entry);
+
+            localStorage.setItem(storageKey, JSON.stringify(data));
+
+            alert("Relevé de température sauvegardé !");
+        }
+
+        function exportDataToExcel() {
+            const tempType = document.getElementById('tempType').value;
+            const storageKey = `temperatureRecords_${tempType}`;
+            const storedData = localStorage.getItem(storageKey);
+
+            if (storedData) {
+                const data = JSON.parse(storedData);
+
+                // Création du workbook
+                const workbook = XLSX.utils.book_new();
+
+                // Regroupement des données par numéro d'appareil et création des feuilles correspondantes
+                const groupedData = data.reduce((acc, entry) => {
+                    if (!acc[entry.deviceNumber]) {
+                        acc[entry.deviceNumber] = [];
+                    }
+                    acc[entry.deviceNumber].push(entry);
+                    return acc;
+                }, {});
+
+                for (let deviceNumber in groupedData) {
+                    const worksheetData = groupedData[deviceNumber].map(entry => ({
+                        "Numéro de l'appareil": entry.deviceNumber,
+                        "Moment de la journée": entry.time,
+                        "Type de froid": entry.tempType,
+                        "Température (°C)": entry.temperature,
+                        "Date": entry.date,
+                        "Nom de la personne": entry.personName
+                    }));
+
+                    const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+                    XLSX.utils.book_append_sheet(workbook, worksheet, `Appareil_${deviceNumber}`);
+                }
+
+                // Choisir le nom du fichier selon le type de froid
+                const filename = `Controle_Temperature_${tempType}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+
+                // Sauvegarder le fichier
+                XLSX.writeFile(workbook, filename);
+            } else {
+                alert("Aucune donnée disponible pour ce mois.");
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrôle de Température HACCP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://images.squarespace-cdn.com/content/v1/5706e13ff8baf375d876a967/1543431402851-TCQUOF46Y44AOQDB5VQJ/Cold+weather.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .warning {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .alert {
+            animation: slideIn 0.5s ease-out;
+        }
+    </style>
+    <!-- Inclusion de la bibliothèque SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contrôle Température HACCP</h1>
+        <p>Veillez à suivre les instructions HACCP pour un relevé correct.</p>
+        <form id="temperatureForm">
+            <label for="time">Moment de la journée :</label>
+            <select id="time" required>
+                <option value="matin">Matin</option>
+                <option value="apres-midi">Après-midi</option>
+            </select>
+
+            <label for="tempType">Type de froid :</label>
+            <select id="tempType" required onchange="adjustTemperatureRange()">
+                <option value="positif">Froid Positif</option>
+                <option value="negatif">Froid Négatif</option>
+            </select>
+
+            <label for="deviceNumber">Numéro de l'appareil :</label>
+            <input type="text" id="deviceNumber" placeholder="Ex: Frigo 1" required>
+
+            <label for="date">Date :</label>
+            <input type="date" id="date" required>
+
+            <label for="temperature">Température (°C) :</label>
+            <input type="number" id="temperature" step="0.1" required>
+
+            <label for="personName">Nom de la personne :</label>
+            <input type="text" id="personName" required>
+
+            <div id="warningMessage" class="warning"></div>
+
+            <button type="button" onclick="saveTemperature()">Sauvegarder le relevé</button>
+            <button type="button" onclick="exportDataToExcel()">Exporter les données du mois</button>
+        </form>
+        <a href="https://icgeborg-my.sharepoint.com/:x:/g/personal/kassim_icgeb_org/EW5GfubZqPZAtbDFXtcFpL4BoXq_MgvQgn856UNUVGZlLA?e=9UxrYA&nav=MTVfezAwMDAwMDAwLTAwMDEtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMH0" target="_blank" style="display: inline-block; margin-top: 20px; text-align: center; padding: 10px; background-color: #28a745; color: white; border-radius: 4px; text-decoration: none;">Accéder au fichier Excel</a>
+    </div>
+
+    <script>
+        let tempRange = {min: 0, max: 4};  // Default range for cold positive
+
+        function adjustTemperatureRange() {
+            const tempType = document.getElementById('tempType').value;
+            if (tempType === 'positif') {
+                tempRange = {min: 0, max: 4};  // Adjust to cold positive range
+            } else {
+                tempRange = {min: -20, max: 0};  // Adjust to cold negative range
             }
         }
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            gapiLoaded();
-            gisLoaded();
-        });
-    </script>
+        function validateTemperature(temp) {
+            return temp >= tempRange.min && temp <= tempRange.max;
+        }
 
-    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+        function saveTemperature() {
+            const time = document.getElementById('time').value;
+            const tempType = document.getElementById('tempType').value;
+            const deviceNumber = document.getElementById('deviceNumber').value;
+            const date = document.getElementById('date').value;
+            const temperature = parseFloat(document.getElementById('temperature').value);
+            const personName = document.getElementById('personName').value;
+
+            const warningMessage = document.getElementById('warningMessage');
+
+            if (!validateTemperature(temperature)) {
+                warningMessage.textContent = `Attention : La température est hors des limites HACCP (${tempRange.min}°C à ${tempRange.max}°C) pour ${tempType === 'positif' ? 'froid positif' : 'froid négatif'}.`;
+                warningMessage.classList.add('alert');
+                return;
+            } else {
+                warningMessage.textContent = '';
+            }
+
+            const entry = {
+                time: time,
+                tempType: tempType,
+                temperature: temperature,
+                date: date,
+                deviceNumber: deviceNumber,
+                personName: personName
+            };
+
+            // Sauvegarde des données dans localStorage
+            const storageKey = `temperatureRecords_${tempType}`;
+            const storedData = localStorage.getItem(storageKey);
+            let data = storedData ? JSON.parse(storedData) : [];
+
+            data.push(entry);
+
+            localStorage.setItem(storageKey, JSON.stringify(data));
+
+            alert("Relevé de température sauvegardé !");
+        }
+
+        function exportDataToExcel() {
+            const tempType = document.getElementById('tempType').value;
+            const storageKey = `temperatureRecords_${tempType}`;
+            const storedData = localStorage.getItem(storageKey);
+
+            if (storedData) {
+                const data = JSON.parse(storedData);
+
+                // Création du workbook
+                const workbook = XLSX.utils.book_new();
+
+                // Regroupement des données par numéro d'appareil et création des feuilles correspondantes
+                const groupedData = data.reduce((acc, entry) => {
+                    if (!acc[entry.deviceNumber]) {
+                        acc[entry.deviceNumber] = [];
+                    }
+                    acc[entry.deviceNumber].push(entry);
+                    return acc;
+                }, {});
+
+                for (let deviceNumber in groupedData) {
+                    const worksheetData = groupedData[deviceNumber].map(entry => ({
+                        "Numéro de l'appareil": entry.deviceNumber,
+                        "Moment de la journée": entry.time,
+                        "Type de froid": entry.tempType,
+                        "Température (°C)": entry.temperature,
+                        "Date": entry.date,
+                        "Nom de la personne": entry.personName
+                    }));
+
+                    const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+                    XLSX.utils.book_append_sheet(workbook, worksheet, `Appareil_${deviceNumber}`);
+                }
+
+                // Choisir le nom du fichier selon le type de froid
+                const filename = `Controle_Temperature_${tempType}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+
+                // Sauvegarder le fichier
+                XLSX.writeFile(workbook, filename);
+            } else {
+                alert("Aucune donnée disponible pour ce mois.");
+            }
+        }
+    </script>
 </body>
 </html>
