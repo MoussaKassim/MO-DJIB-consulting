@@ -7,10 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://images.squarespace-cdn.com/content/v1/5706e13ff8baf375d876a967/1543431402851-TCQUOF46Y44AOQDB5VQJ/Cold+weather.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
+            background-color: #f4f4f4;
             color: #333;
             margin: 0;
             padding: 0;
@@ -87,7 +84,6 @@
             animation: slideIn 0.5s ease-out;
         }
     </style>
-    <!-- Inclusion de la bibliothèque SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
@@ -125,7 +121,6 @@
             <button type="button" onclick="saveTemperature()">Sauvegarder le relevé</button>
             <button type="button" onclick="exportDataToExcel()">Exporter les données du mois</button>
         </form>
-        <a href="https://icgeborg-my.sharepoint.com/:x:/g/personal/kassim_icgeb_org/EW5GfubZqPZAtbDFXtcFpL4BoXq_MgvQgn856UNUVGZlLA?e=9UxrYA&nav=MTVfezAwMDAwMDAwLTAwMDEtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMH0" target="_blank" style="display: inline-block; margin-top: 20px; text-align: center; padding: 10px; background-color: #28a745; color: white; border-radius: 4px; text-decoration: none;">Accéder au fichier Excel</a>
     </div>
 
     <script>
@@ -163,30 +158,40 @@
             }
 
             const entry = {
-                time: time,
+                date: date,
+                hour: time,  // Ajoutez l'heure
+                deviceNumber: deviceNumber,
                 tempType: tempType,
                 temperature: temperature,
-                date: date,
-                deviceNumber: deviceNumber,
                 personName: personName
             };
 
-            // Sauvegarde des données dans localStorage
-            const storageKey = `temperatureRecords_${tempType}`;
-            const storedData = localStorage.getItem(storageKey);
-            let data = storedData ? JSON.parse(storedData) : [];
+            // URL du script Google Apps
+            const url = 'https://script.google.com/macros/s/AKfycbxR2bLgKvUrqMNESNBTMsHfAHaYg98X9TihP_9kiEevIHjWCRp-sdGpAjyDhu7243lpww/exec';
 
-            data.push(entry);
-
-            localStorage.setItem(storageKey, JSON.stringify(data));
-
-            alert("Relevé de température sauvegardé !");
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(entry)
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Réponse du serveur:', data);
+                alert('Relevé de température sauvegardé dans Google Sheets !');
+            })
+            .catch((error) => {
+                console.error('Erreur lors de la sauvegarde:', error);
+            });
         }
 
         function exportDataToExcel() {
-            const tempType = document.getElementById('tempType').value;
-            const storageKey = `temperatureRecords_${tempType}`;
-            const storedData = localStorage.getItem(storageKey);
+            const deviceNumber = document.getElementById('deviceNumber').value;
+            const date = document.getElementById('date').value;
+
+            const monthKey = `${deviceNumber}_${date.split('-').slice(0, 2).join('_')}`;
+            const storedData = localStorage.getItem(monthKey);
 
             if (storedData) {
                 const data = JSON.parse(storedData);
@@ -194,33 +199,20 @@
                 // Création du workbook
                 const workbook = XLSX.utils.book_new();
 
-                // Regroupement des données par numéro d'appareil et création des feuilles correspondantes
-                const groupedData = data.reduce((acc, entry) => {
-                    if (!acc[entry.deviceNumber]) {
-                        acc[entry.deviceNumber] = [];
-                    }
-                    acc[entry.deviceNumber].push(entry);
-                    return acc;
-                }, {});
+                // Créer une nouvelle feuille pour le réfrigérateur/congélateur/chambre froide
+                const worksheetData = data.map(entry => ({
+                    "Moment de la journée": entry.hour,
+                    "Type de froid": entry.tempType,
+                    "Température (°C)": entry.temperature,
+                    "Date": entry.date,
+                    "Nom de la personne": entry.personName
+                }));
 
-                for (let deviceNumber in groupedData) {
-                    const worksheetData = groupedData[deviceNumber].map(entry => ({
-                        "Numéro de l'appareil": entry.deviceNumber,
-                        "Moment de la journée": entry.time,
-                        "Type de froid": entry.tempType,
-                        "Température (°C)": entry.temperature,
-                        "Date": entry.date,
-                        "Nom de la personne": entry.personName
-                    }));
+                const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+                XLSX.utils.book_append_sheet(workbook, worksheet, `Appareil_${deviceNumber}`);
 
-                    const worksheet = XLSX.utils.json_to_sheet(worksheetData);
-                    XLSX.utils.book_append_sheet(workbook, worksheet, `Appareil_${deviceNumber}`);
-                }
-
-                // Choisir le nom du fichier selon le type de froid
-                const filename = `Controle_Temperature_${tempType}_${new Date().toISOString().slice(0, 10)}.xlsx`;
-
-                // Sauvegarder le fichier
+                // Sauvegarder le fichier avec le numéro de l'appareil et la date
+                const filename = `Controle_Temperature_${monthKey}.xlsx`;
                 XLSX.writeFile(workbook, filename);
             } else {
                 alert("Aucune donnée disponible pour ce mois.");
