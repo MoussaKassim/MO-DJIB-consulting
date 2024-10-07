@@ -11,6 +11,7 @@
             background-color: #f0f8ff;
             margin: 0;
             padding: 20px;
+            transition: background-color 0.3s;
         }
 
         h1 {
@@ -27,6 +28,11 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .container:hover {
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
         }
 
         label {
@@ -45,6 +51,13 @@
             border-radius: 5px;
             box-sizing: border-box;
             font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
         }
 
         button {
