@@ -194,7 +194,7 @@
             document.getElementById('warningMessage').textContent = ''; // Clear previous warning
             document.getElementById('successMessage').textContent = ''; // Clear previous success message
 
-            fetch('https://script.google.com/macros/s/AKfycbxQxRnw0fwCe-vqFZtN6Ry49jlPpD0abLtys9wjIoWREwG2XBpOlQ0C70PHALtuus-C_A/exec', {
+            fetch('https://sheetdb.io/api/v1/vn7qx8j31geep', {
                 method: 'POST',
                 body: JSON.stringify(entry),
                 headers: {
@@ -203,7 +203,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.message || "Données sauvegardées avec succès !");
+                alert("Données sauvegardées avec succès !");
                 document.getElementById('temperatureForm').reset();
                 document.getElementById('successMessage').textContent = 'Données sauvegardées avec succès !';
             })
